@@ -77,7 +77,7 @@ Normalized performance from the above (ticks = duration x CPU\_GHz; lower is bet
 | AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1     | 47.06       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0 | 45.64       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x | 40.48       |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2 | 40.09       |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2 | 40.07       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0     | 31.73       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2 | 29.11       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2     | 27.42       |
