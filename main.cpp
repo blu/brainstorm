@@ -95,13 +95,9 @@ public:
 
 template < typename T >
 class Stack {
-	mutable size_t size;
+	size_t size;
 	size_t top;
 	testbed::scoped_ptr< T, generic_free> buffer;
-
-	void stack_fault() const {
-		size = 0;
-	}
 
 	Stack(); // undefined
 
@@ -120,6 +116,10 @@ public:
 		return 0 == size;
 	}
 
+	void stack_fault() {
+		size = 0;
+	}
+
 	void push(const T arg) {
 		if (is_stack_fault())
 			return;
@@ -130,7 +130,7 @@ public:
 			stack_fault();
 	}
 
-	T getTop() const {
+	T getTop() {
 		if (is_stack_fault())
 			return T(-1);
 
@@ -145,14 +145,23 @@ public:
 		if (is_stack_fault())
 			return;
 
-		if (top-- == size_t(-1))
+		if (top == size_t(-1)) {
 			stack_fault();
+			return;
+		}
+
+		--top;
+	}
+
+	size_t count() const {
+		return top + 1;
 	}
 };
 
 static size_t seekBalancedClose(
 	const command_t* const program,
-	const size_t programLength) {
+	const size_t programLength,
+	Stack< size_t >& ipStack) {
 
 	size_t count = 0;
 	size_t pos = 0;
@@ -164,12 +173,13 @@ static size_t seekBalancedClose(
 		}
 		if (program[pos] == command_t(']')) {
 			if (0 == count)
-				break;
+				return pos;
 			--count;
 		}
 	}
 
-	return pos;
+	ipStack.stack_fault();
+	return 0;
 }
 
 int main(
@@ -250,7 +260,7 @@ int main(
 			break;
 		case command_t('['):
 			if (0 == mem()[dp])
-				ip += seekBalancedClose(program() + ip, programLength - ip);
+				ip += seekBalancedClose(program() + ip, programLength - ip, ipStack);
 			else // enter loop
 				ipStack.push(ip);
 			break;
@@ -268,13 +278,18 @@ int main(
 		++count;
 	}
 
-	if (dp >= memorySize && ip < programLength) {
-		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip << "\n";
+	if (dp >= memorySize) {
+		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip - 1 << "\n";
 		return -1;
 	}
 
 	if (ipStack.is_stack_fault()) {
-		stream::cerr << "program error: branch balance breach at ip " << ip << "\n";
+		stream::cerr << "program error: branch balance breach at ip " << ip - 1 << "\n";
+		return -1;
+	}
+	else // late check for imbalanced entered loops
+	if (ipStack.count()) {
+		stream::cerr << "program error: branch balance breach at ip " << ipStack.getTop() << "\n";
 		return -1;
 	}
 
