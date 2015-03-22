@@ -97,7 +97,7 @@ template < typename T >
 class Stack {
 	size_t size;
 	size_t top;
-	testbed::scoped_ptr< T, generic_free> buffer;
+	testbed::scoped_ptr< T, generic_free > buffer;
 
 	Stack(); // undefined
 
