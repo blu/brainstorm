@@ -99,6 +99,10 @@ class Stack {
 	size_t top;
 	testbed::scoped_ptr< T, generic_free> buffer;
 
+	void stack_fault() const {
+		size = 0;
+	}
+
 	Stack(); // undefined
 
 public:
@@ -110,10 +114,6 @@ public:
 
 	bool is_valid() const {
 		return 0 != buffer();
-	}
-
-	void stack_fault() const {
-		size = 0;
 	}
 
 	bool is_stack_fault() const {
@@ -147,10 +147,6 @@ public:
 
 		if (top-- == size_t(-1))
 			stack_fault();
-	}
-
-	size_t count() const {
-		return top + 1;
 	}
 };
 
@@ -205,9 +201,9 @@ int main(
 		return -1;
 	}
 
-	Stack< size_t > stackIp(programLength);
+	Stack< size_t > ipStack(programLength);
 
-	if (!stackIp.is_valid()) {
+	if (!ipStack.is_valid()) {
 		stream::cerr << "failed to provide ip stack\n";
 		return -1;
 	}
@@ -229,7 +225,7 @@ int main(
 	while (count < terminalCount &&
 		   ip < programLength &&
 		   dp < memorySize &&
-		   !stackIp.is_stack_fault()) {
+		   !ipStack.is_stack_fault()) {
 
 		switch (program()[ip]) {
 			int input;
@@ -256,13 +252,13 @@ int main(
 			if (0 == mem()[dp])
 				ip += seekBalancedClose(program() + ip, programLength - ip);
 			else // enter loop
-				stackIp.push(ip);
+				ipStack.push(ip);
 			break;
 		case command_t(']'):
 			if (0 != mem()[dp])
-				ip = stackIp.getTop();
+				ip = ipStack.getTop();
 			else // exit loop
-				stackIp.pop();
+				ipStack.pop();
 			break;
 		default:
 			// discard non-ops
@@ -277,7 +273,7 @@ int main(
 		return -1;
 	}
 
-	if (stackIp.is_stack_fault()) {
+	if (ipStack.is_stack_fault()) {
 		stream::cerr << "program error: branch balance breach at ip " << ip << "\n";
 		return -1;
 	}
