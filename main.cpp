@@ -249,7 +249,6 @@ int main(
 			stream::cout << mem()[dp] << " ";
 			break;
 		case command_t(','):
-			stream::cout << ": ";
 			stream::cin >> input;
 			mem()[dp] = word_t(input);
 			break;
