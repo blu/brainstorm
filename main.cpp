@@ -22,13 +22,18 @@ out cerr;
 static const char arg_prefix[]         = "-";
 static const char arg_memory_size[]    = "memory_size";
 static const char arg_terminal_count[] = "terminal_count";
+static const char arg_print_ascii[]    = "print_ascii";
 
 static const size_t default_memory_size_kw = 32;
 static const size_t default_terminal_count = 4096;
 
 struct cli_param {
+	enum {
+		FLAG_PRINT_ASCII = 1
+	};
 	size_t memorySize;
 	size_t terminalCount;
+	size_t flags;
 	const char* filename;
 };
 
@@ -66,6 +71,11 @@ parse_cli(
 			continue;
 		}
 
+		if (!std::strcmp(argv[i] + prefix_len, arg_print_ascii)) {
+			param.flags |= size_t(cli_param::FLAG_PRINT_ASCII);
+			continue;
+		}
+
 		success = false;
 	}
 
@@ -73,7 +83,8 @@ parse_cli(
 		stream::cerr << "usage: " << argv[0] << " [<option> ...] <source_filename>\n"
 			"options (multiple args to an option must constitute a single string, eg. -foo \"a b c\"):\n"
 			"\t" << arg_prefix << arg_memory_size << " <positive_integer>\t\t: amount of memory available to program, in words; default is " << default_memory_size_kw << "Kwords\n"
-			"\t" << arg_prefix << arg_terminal_count << " <positive_integer>\t: number of steps after which program is forcefully terminated; default is " << default_terminal_count << "\n";
+			"\t" << arg_prefix << arg_terminal_count << " <positive_integer>\t: number of steps after which program is forcefully terminated; default is " << default_terminal_count << "\n"
+			"\t" << arg_prefix << arg_print_ascii << "\t\t\t\t: print out in ASCII encoding rather than raw numbers\n";
 
 		return 1;
 	}
@@ -195,12 +206,15 @@ int main(
 	cli_param param;
 	param.memorySize = default_memory_size_kw << 10;
 	param.terminalCount = default_terminal_count;
+	param.flags = 0;
 	param.filename = 0;
 
 	const int result_cli = parse_cli(argc, argv, param);
 
 	if (0 != result_cli)
 		return result_cli;
+
+	const bool print_ascii = bool(param.flags & cli_param::FLAG_PRINT_ASCII);
 
 	size_t programLength = 0;
 	const scoped_ptr< command_t, generic_free > program(
@@ -252,7 +266,10 @@ int main(
 			--mem()[dp];
 			break;
 		case command_t('.'):
-			stream::cout << mem()[dp] << " ";
+			if (print_ascii)
+				stream::cout << char(mem()[dp]);
+			else
+				stream::cout << mem()[dp] << " ";
 			break;
 		case command_t(','):
 			stream::cin >> input;
