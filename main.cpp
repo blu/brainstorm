@@ -265,9 +265,10 @@ int main(
 				ipStack.push(ip);
 			break;
 		case command_t(']'):
-			if (0 != mem()[dp])
-				ip = ipStack.getTop();
-			else // exit loop
+			if (0 != mem()[dp]) {
+				const size_t iq = ipStack.getTop();
+				ip = (size_t(-1) != iq)? iq: ip;
+			} else // exit loop
 				ipStack.pop();
 			break;
 		default:
