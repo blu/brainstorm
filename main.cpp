@@ -288,7 +288,7 @@ int main(
 		return -1;
 	}
 	else // late check for imbalanced entered loops
-	if (ipStack.count()) {
+	if (ipStack.count() && count != terminalCount) {
 		stream::cerr << "program error: branch balance breach at ip " << ipStack.getTop() << "\n";
 		return -1;
 	}
