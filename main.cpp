@@ -31,8 +31,8 @@ struct cli_param {
 	enum {
 		FLAG_PRINT_ASCII = 1
 	};
+	uint64_t terminalCount;
 	size_t memorySize;
-	size_t terminalCount;
 	size_t flags;
 	const char* filename;
 };
@@ -92,8 +92,7 @@ parse_cli(
 	return 0;
 }
 
-typedef uint8_t command_t; // instruction type
-typedef int8_t word_t; // machine word type
+typedef uint8_t word_t; // machine word type
 
 template < typename T >
 class generic_free {
@@ -104,93 +103,163 @@ public:
 	}
 };
 
-template < typename T >
-class Stack {
-	size_t size;
-	size_t top;
-	testbed::scoped_ptr< T, generic_free > buffer;
+template < bool >
+struct compile_assert;
 
-	Stack(); // undefined
+template <>
+struct compile_assert< true > {
+	compile_assert() {}
+};
+
+enum Opcode {
+	OPCODE_INC_WORD,          // '+'
+	OPCODE_DEC_WORD,          // '-'
+	OPCODE_INC_PTR,           // '>'
+	OPCODE_DEC_PTR,           // '<'
+	OPCODE_INPUT,             // '.'
+	OPCODE_OUTPUT,            // ','
+	OPCODE_COND_L = 0x8000,   // '['
+	OPCODE_COND_R = 0xc000,   // ']'
+
+	OPCODE_COUNT = 8
+};
+
+namespace {
+const compile_assert< 8 == OPCODE_COUNT > assert_opcode_count;
+} // namespace annonymous
+
+class Command {
+	uint16_t op; // encoding uses unsigned offset (direction determined by the type of op)
+
+	Command(); // undefined
 
 public:
-	Stack(const size_t size)
-	: size(size)
-	, top(-1)
-	, buffer(reinterpret_cast< T* >(std::malloc(sizeof(T) * size))) {
-	}
+	enum { offset_range = 1 << 14 };
 
-	bool is_valid() const {
-		return 0 != buffer();
-	}
+	Command(
+		const Opcode an_op,
+		const uint16_t an_offset) {
 
-	bool is_stack_fault() const {
-		return 0 == size;
-	}
-
-	void stack_fault() {
-		size = 0;
-	}
-
-	void push(const T arg) {
-		if (is_stack_fault())
-			return;
-
-		if (++top != size)
-			buffer()[top] = arg;
-		else
-			stack_fault();
-	}
-
-	T getTop() {
-		if (is_stack_fault())
-			return T(-1);
-
-		if (top < size)
-			return buffer()[top];
-
-		stack_fault();
-		return T(-1);
-	}
-
-	void pop() {
-		if (is_stack_fault())
-			return;
-
-		if (top == size_t(-1)) {
-			stack_fault();
-			return;
+		switch (an_op) {
+		case OPCODE_COND_L:
+		case OPCODE_COND_R:
+			op = an_op | an_offset;
+			break;
+		default:
+			op = an_op;
 		}
-
-		--top;
 	}
 
-	size_t count() const {
-		return top + 1;
+	Opcode getOp() const {
+
+		// is this a conditional branch?
+		if (op & uint16_t(0x8000))
+			return Opcode(op & uint16_t(0xc000));
+
+		return Opcode(op);
+	}
+
+	uint16_t getOffset() const {
+		return op & ~uint16_t(0xc000);
 	}
 };
 
+namespace {
+const compile_assert< 2 == sizeof(Command) > assert_sizeof_command;
+} // namespace annonymous
+
 static size_t seekBalancedClose(
-	const command_t* const program,
-	const size_t programLength,
-	Stack< size_t >& ipStack) {
+	const Command* const program,
+	const size_t programLength) {
 
 	size_t count = 0;
 	size_t pos = 0;
 
 	while (++pos < programLength) {
-		if (program[pos] == command_t('[')) {
+		if (program[pos].getOp() == OPCODE_COND_L) {
 			++count;
 			continue;
 		}
-		if (program[pos] == command_t(']')) {
+		if (program[pos].getOp() == OPCODE_COND_R) {
 			if (0 == count)
 				return pos;
 			--count;
 		}
 	}
 
-	ipStack.stack_fault();
 	return 0;
+}
+
+static Command* translate(
+	const char* const source,
+	const size_t sourceLength,
+	size_t& programLength) {
+
+	using testbed::scoped_ptr;
+
+	scoped_ptr< Command, generic_free > program(
+		reinterpret_cast< Command* >(std::calloc(sourceLength, sizeof(Command))));
+
+	size_t i = 0;
+	size_t j = 0;
+
+	while (i < sourceLength) {
+		switch (source[i]) {
+		case '+':
+			program()[j++] = Command(OPCODE_INC_WORD, 0);
+			break;
+		case '-':
+			program()[j++] = Command(OPCODE_DEC_WORD, 0);
+			break;
+		case '>':
+			program()[j++] = Command(OPCODE_INC_PTR, 0);
+			break;
+		case '<':
+			program()[j++] = Command(OPCODE_DEC_PTR, 0);
+			break;
+		case ',':
+			program()[j++] = Command(OPCODE_INPUT, 0);
+			break;
+		case '.':
+			program()[j++] = Command(OPCODE_OUTPUT, 0);
+			break;
+		case '[':
+			program()[j++] = Command(OPCODE_COND_L, 0); // defer offset calculation
+			break;
+		case ']':
+			program()[j++] = Command(OPCODE_COND_R, 0); // defer offset calculation
+			break;
+		}
+		++i;
+	}
+
+	// calculate offsets
+	for (i = 0; i < j; ++i)
+		if (OPCODE_COND_L == program()[i].getOp()) {
+				const size_t offset = seekBalancedClose(program() + i, j - i);
+
+				if (0 == offset)
+					break;
+
+				if (Command::offset_range > offset) {
+					program()[i] = Command(OPCODE_COND_L, uint16_t(offset));
+					program()[i + offset] = Command(OPCODE_COND_R, uint16_t(offset));
+					continue;
+				}
+
+				stream::cerr << "program error: way too far jump at ip " << i << " - crash imminent\n";
+		}
+
+	if (i != j) {
+		stream::cerr << "program error: unmached [ at ip " << i << "\n";
+		return 0;
+	}
+
+	Command* const res = program();
+	program.reset();
+	programLength = j;
+
+	return res;
 }
 
 int main(
@@ -198,6 +267,7 @@ int main(
 	char** argv) {
 
 	using testbed::scoped_ptr;
+	using testbed::get_buffer_from_file;
 
 	stream::cin.open(stdin);
 	stream::cout.open(stdout);
@@ -216,19 +286,21 @@ int main(
 
 	const bool print_ascii = bool(param.flags & cli_param::FLAG_PRINT_ASCII);
 
-	size_t programLength = 0;
-	const scoped_ptr< command_t, generic_free > program(
-		reinterpret_cast< command_t* >(testbed::get_buffer_from_file(param.filename, programLength)));
+	size_t sourceLength = 0;
+	const scoped_ptr< char, generic_free > source(
+		reinterpret_cast< char* >(get_buffer_from_file(param.filename, sourceLength)));
 
-	if (0 == program()) {
+	if (0 == source()) {
 		stream::cerr << "failed to open source file\n";
 		return -1;
 	}
 
-	Stack< size_t > ipStack(programLength);
+	size_t programLength = 0;
+	const scoped_ptr< Command, generic_free > program(
+		reinterpret_cast< Command* >(translate(source(), sourceLength, programLength)));
 
-	if (!ipStack.is_valid()) {
-		stream::cerr << "failed to provide ip stack\n";
+	if (!program()) {
+		stream::cerr << "program error: unable to translate to IR\n";
 		return -1;
 	}
 
@@ -240,57 +312,50 @@ int main(
 		return -1;
 	}
 
+	uint64_t count = 0;
+	const uint64_t terminalCount = param.terminalCount;
 	size_t ip = 0;
-	size_t count = 0;
-	const size_t terminalCount = param.terminalCount;
 	size_t dp = 0;
 	const size_t memorySize = param.memorySize;
 
 	while (count < terminalCount &&
 		   ip < programLength &&
-		   dp < memorySize &&
-		   !ipStack.is_stack_fault()) {
+		   dp < memorySize) {
 
-		switch (program()[ip]) {
+		const Command cmd = program()[ip];
+
+		switch (cmd.getOp()) {
 			int input;
-		case command_t('>'):
-			++dp;
-			break;
-		case command_t('<'):
-			--dp;
-			break;
-		case command_t('+'):
+		case OPCODE_INC_WORD:
 			++mem()[dp];
 			break;
-		case command_t('-'):
+		case OPCODE_DEC_WORD:
 			--mem()[dp];
 			break;
-		case command_t('.'):
+		case OPCODE_INC_PTR:
+			++dp;
+			break;
+		case OPCODE_DEC_PTR:
+			--dp;
+			break;
+		case OPCODE_INPUT:
+			stream::cin >> input;
+			mem()[dp] = word_t(input);
+			break;
+		case OPCODE_OUTPUT:
 			if (print_ascii)
 				stream::cout << char(mem()[dp]);
 			else
 				stream::cout << mem()[dp] << " ";
 			break;
-		case command_t(','):
-			stream::cin >> input;
-			mem()[dp] = word_t(input);
-			break;
-		case command_t('['):
+		case OPCODE_COND_L:
 			if (0 == mem()[dp])
-				ip += seekBalancedClose(program() + ip, programLength - ip, ipStack);
-			else // enter loop
-				ipStack.push(ip);
+				ip += size_t(cmd.getOffset());
 			break;
-		case command_t(']'):
-			if (0 != mem()[dp]) {
-				const size_t iq = ipStack.getTop();
-				ip = (size_t(-1) != iq)? iq: ip;
-			} else // exit loop
-				ipStack.pop();
+		case OPCODE_COND_R:
+			if (0 != mem()[dp])
+				ip -= size_t(cmd.getOffset());
 			break;
-		default:
-			// discard non-ops
-			--count;
 		}
 		++ip;
 		++count;
@@ -298,16 +363,6 @@ int main(
 
 	if (dp >= memorySize) {
 		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip - 1 << "\n";
-		return -1;
-	}
-
-	if (ipStack.is_stack_fault()) {
-		stream::cerr << "program error: branch balance breach at ip " << ip - 1 << "\n";
-		return -1;
-	}
-	else // late check for imbalanced entered loops
-	if (ipStack.count() && count != terminalCount) {
-		stream::cerr << "program error: branch balance breach at ip " << ipStack.getTop() << "\n";
 		return -1;
 	}
 
