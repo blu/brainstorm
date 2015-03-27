@@ -26,6 +26,14 @@ static const char arg_print_ascii[]    = "print_ascii";
 
 static const size_t default_memory_size_kw = 32;
 static const size_t default_terminal_count = 4096;
+static const size_t mempage_size = 4096;
+#if __LP64__ == 1
+static const size_t cacheline_size = 64;
+
+#else
+static const size_t cacheline_size = 32;
+
+#endif
 
 struct cli_param {
 	enum {
@@ -167,7 +175,7 @@ public:
 	Opcode getOp() const {
 
 		// is this a conditional branch?
-		if (op & uint16_t(0x8000))
+		if (op & uint16_t(0xc000))
 			return Opcode(op & uint16_t(0xc000));
 
 		return Opcode(op);
@@ -207,12 +215,8 @@ static size_t seekBalancedClose(
 static Command* translate(
 	const char* const source,
 	const size_t sourceLength,
+	Command* const program,
 	size_t& programLength) {
-
-	using testbed::scoped_ptr;
-
-	scoped_ptr< Command, generic_free > program(
-		reinterpret_cast< Command* >(std::calloc(sourceLength, sizeof(Command))));
 
 	size_t i = 0;
 	size_t j = 0;
@@ -220,28 +224,28 @@ static Command* translate(
 	while (i < sourceLength) {
 		switch (source[i]) {
 		case '+':
-			program()[j++] = Command(OPCODE_INC_WORD, 0);
+			program[j++] = Command(OPCODE_INC_WORD, 0);
 			break;
 		case '-':
-			program()[j++] = Command(OPCODE_DEC_WORD, 0);
+			program[j++] = Command(OPCODE_DEC_WORD, 0);
 			break;
 		case '>':
-			program()[j++] = Command(OPCODE_INC_PTR, 0);
+			program[j++] = Command(OPCODE_INC_PTR, 0);
 			break;
 		case '<':
-			program()[j++] = Command(OPCODE_DEC_PTR, 0);
+			program[j++] = Command(OPCODE_DEC_PTR, 0);
 			break;
 		case ',':
-			program()[j++] = Command(OPCODE_INPUT, 0);
+			program[j++] = Command(OPCODE_INPUT, 0);
 			break;
 		case '.':
-			program()[j++] = Command(OPCODE_OUTPUT, 0);
+			program[j++] = Command(OPCODE_OUTPUT, 0);
 			break;
 		case '[':
-			program()[j++] = Command(OPCODE_COND_L, 0); // defer offset calculation
+			program[j++] = Command(OPCODE_COND_L, 0); // defer offset calculation
 			break;
 		case ']':
-			program()[j++] = Command(OPCODE_COND_R, 0); // defer offset calculation
+			program[j++] = Command(OPCODE_COND_R, 0); // defer offset calculation
 			break;
 		}
 		++i;
@@ -249,15 +253,15 @@ static Command* translate(
 
 	// calculate offsets
 	for (i = 0; i < j; ++i)
-		if (OPCODE_COND_L == program()[i].getOp()) {
-				const size_t offset = seekBalancedClose(program() + i, j - i);
+		if (OPCODE_COND_L == program[i].getOp()) {
+				const size_t offset = seekBalancedClose(program + i, j - i);
 
 				if (0 == offset)
 					break;
 
 				if (Command::offset_range > offset) {
-					program()[i] = Command(OPCODE_COND_L, uint16_t(offset));
-					program()[i + offset] = Command(OPCODE_COND_R, uint16_t(offset));
+					program[i] = Command(OPCODE_COND_L, uint16_t(offset));
+					program[i + offset] = Command(OPCODE_COND_R, uint16_t(offset));
 					continue;
 				}
 
@@ -269,12 +273,37 @@ static Command* translate(
 		return 0;
 	}
 
-	Command* const res = program();
-	program.reset();
 	programLength = j;
-
-	return res;
+	return program;
 }
+
+template < typename WORD_T, uintptr_t ALIGNMENT = cacheline_size >
+class AlignedPtr {
+	WORD_T* m;
+
+public:
+	AlignedPtr(const uintptr_t ptr)
+	: m(reinterpret_cast< WORD_T* >((ptr + ALIGNMENT - 1) & ~(ALIGNMENT - 1))) {
+	}
+
+	WORD_T* operator()() const {
+		return m;
+	}
+};
+
+template < typename WORD_T >
+class Ptr {
+	WORD_T* m;
+
+public:
+	Ptr(WORD_T* const ptr)
+	: m(ptr) {
+	}
+
+	WORD_T* operator()() const {
+		return m;
+	}
+};
 
 int main(
 	int argc,
@@ -309,32 +338,37 @@ int main(
 		return -1;
 	}
 
+	const size_t dataLength = param.memorySize;
+
+	scoped_ptr< void, generic_free > space(
+		std::calloc(sourceLength * sizeof(Command) + dataLength * sizeof(word_t) + mempage_size + cacheline_size, sizeof(int8_t)));
+
+	if (0 == space()) {
+		stream::cerr << "failed to provide program and data memory\n";
+		return 0;
+	}
+
+	const AlignedPtr< Command, mempage_size > code((uintptr_t(space())));
 	size_t programLength = 0;
-	const scoped_ptr< Command, generic_free > program(
-		reinterpret_cast< Command* >(translate(source(), sourceLength, programLength)));
+
+	const Ptr< Command > program(
+		translate(source(), sourceLength, code(), programLength));
 
 	if (!program()) {
-		stream::cerr << "program error: unable to translate to IR\n";
+		stream::cerr << "unable to provide program IR\n";
 		return -1;
 	}
 
-	const scoped_ptr< word_t, generic_free > mem(
-		reinterpret_cast< word_t* >(std::calloc(param.memorySize, sizeof(word_t))));
-
-	if (0 == mem()) {
-		stream::cerr << "failed to provide data memory\n";
-		return -1;
-	}
+	const AlignedPtr< word_t, cacheline_size > mem(uintptr_t(code() + programLength));
 
 	uint64_t count = 0;
 	const uint64_t terminalCount = param.terminalCount;
 	size_t ip = 0;
 	size_t dp = 0;
-	const size_t memorySize = param.memorySize;
 
 	while (count < terminalCount &&
 		   ip < programLength &&
-		   dp < memorySize) {
+		   dp < dataLength) {
 
 		const Command cmd = program()[ip];
 		int input;
@@ -357,10 +391,14 @@ int main(
 			mem()[dp] = word_t(input);
 			break;
 		case OPCODE_OUTPUT:
-			if (print_ascii)
-				stream::cout << char(mem()[dp]);
-			else
-				stream::cout << mem()[dp] << " ";
+
+#if PRINT_ASCII
+			stream::cout << char(mem()[dp]);
+
+#else
+			stream::cout << mem()[dp] << " ";
+
+#endif
 			break;
 		case OPCODE_COND_L:
 			if (0 == mem()[dp])
@@ -371,11 +409,12 @@ int main(
 				ip -= size_t(cmd.getOffset());
 			break;
 		}
+
 		++ip;
 		++count;
 	}
 
-	if (dp >= memorySize) {
+	if (dp >= dataLength) {
 		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip - 1 << "\n";
 		return -1;
 	}
