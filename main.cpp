@@ -32,8 +32,16 @@ struct cli_param {
 		FLAG_PRINT_ASCII = 1
 	};
 	uint64_t terminalCount;
-	size_t memorySize;
-	size_t flags;
+
+#if BAD_CASE
+	uint32_t memorySize;
+	uint32_t flags;
+
+#else
+	uint64_t memorySize;
+	uint64_t flags;
+
+#endif
 	const char* filename;
 };
 
@@ -58,9 +66,15 @@ parse_cli(
 		}
 
 		if (!std::strcmp(argv[i] + prefix_len, arg_memory_size)) {
+#if BAD_CASE
+			if (++i == argc || 1 != sscanf(argv[i], "%u", &param.memorySize))
+				success = false;
+
+#else
 			if (++i == argc || 1 != sscanf(argv[i], "%lu", &param.memorySize))
 				success = false;
 
+#endif
 			continue;
 		}
 
@@ -323,9 +337,9 @@ int main(
 		   dp < memorySize) {
 
 		const Command cmd = program()[ip];
+		int input;
 
 		switch (cmd.getOp()) {
-			int input;
 		case OPCODE_INC_WORD:
 			++mem()[dp];
 			break;
