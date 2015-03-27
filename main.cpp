@@ -136,21 +136,13 @@ struct compile_assert< true > {
 enum Opcode {
 	OPCODE_INC_WORD,          // '+'
 	OPCODE_DEC_WORD,          // '-'
-	OPCODE_INC_PTR,           // '>'
-	OPCODE_DEC_PTR,           // '<'
 	OPCODE_INPUT,             // '.'
 	OPCODE_OUTPUT,            // ','
 	OPCODE_COND_L   = 0x8000, // '['
 	OPCODE_COND_R   = 0xc000, // ']'
 	OPCODE_ADD_PTR  = 0x2000, // '>', repetitions of
 	OPCODE_SUB_PTR  = 0x3000, // '<', repetitions of
-
-	OPCODE_COUNT = 10
 };
-
-namespace {
-const compile_assert< 10 == OPCODE_COUNT > assert_opcode_count;
-} // namespace annonymous
 
 class Command {
 	uint16_t op; // encoding uses unsigned immediates (direction determined by the type of op)
@@ -225,7 +217,7 @@ static size_t seekBalancedClose(
 	return 0;
 }
 
-static Command* translate(
+static Command* __attribute__ ((noinline)) translate(
 	const char* const source,
 	const size_t sourceLength,
 	Command* const program,
@@ -246,20 +238,26 @@ static Command* translate(
 			break;
 		case '>':
 			for (imm = i + 1; imm < sourceLength && '>' == source[imm]; ++imm);
-			if (Command::ptr_arith_range <= imm - i) {
+			if (Command::ptr_arith_range > imm - i) {
+				program[j++] = Command(OPCODE_ADD_PTR, uint16_t(imm - i));
+			}
+			else {
+				program[j++] = Command(OPCODE_ADD_PTR, 0);
 				stream::cerr << "program error: way too many '>' at ip " << i << "\n";
 				err = true;
 			}
-			program[j++] = Command(OPCODE_ADD_PTR, uint16_t(imm - i));
 			i = imm - 1;
 			break;
 		case '<':
 			for (imm = i + 1; imm < sourceLength && '<' == source[imm]; ++imm);
-			if (Command::ptr_arith_range <= imm - i) {
+			if (Command::ptr_arith_range > imm - i) {
+				program[j++] = Command(OPCODE_SUB_PTR, uint16_t(imm - i));
+			}
+			else {
+				program[j++] = Command(OPCODE_SUB_PTR, 0);
 				stream::cerr << "program error: way too many '<' at ip " << i << "\n";
 				err = true;
 			}
-			program[j++] = Command(OPCODE_SUB_PTR, uint16_t(imm - i));
 			i = imm - 1;
 			break;
 		case ',':
@@ -283,8 +281,11 @@ static Command* translate(
 		if (OPCODE_COND_L == program[i].getOp()) {
 				const size_t offset = seekBalancedClose(program + i, j - i);
 
-				if (0 == offset)
+				if (0 == offset) {
+					stream::cerr << "program error: unmached [ at ip " << i << "\n";
+					err = true;
 					break;
+				}
 
 				if (Command::branch_range > offset) {
 					program[i] = Command(OPCODE_COND_L, uint16_t(offset));
@@ -295,11 +296,6 @@ static Command* translate(
 				stream::cerr << "program error: way too far jump at ip " << i << "\n";
 				err = true;
 		}
-
-	if (i != j) {
-		stream::cerr << "program error: unmached [ at ip " << i << "\n";
-		err = true;
-	}
 
 	if (err)
 		return 0;
@@ -323,7 +319,7 @@ public:
 };
 
 template < typename WORD_T >
-class Ptr {
+class Ptr { // just for notational consistency with AlignedPtr
 	WORD_T* m;
 
 public:
@@ -434,10 +430,10 @@ int main(
 				ip -= size_t(cmd.getOffset());
 			break;
 		case OPCODE_ADD_PTR:
-			dp += cmd.getArith();
+			dp += size_t(cmd.getArith());
 			break;
 		case OPCODE_SUB_PTR:
-			dp -= cmd.getArith();
+			dp -= size_t(cmd.getArith());
 			break;
 		}
 
