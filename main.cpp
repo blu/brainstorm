@@ -140,32 +140,37 @@ enum Opcode {
 	OPCODE_DEC_PTR,           // '<'
 	OPCODE_INPUT,             // '.'
 	OPCODE_OUTPUT,            // ','
-	OPCODE_COND_L = 0x8000,   // '['
-	OPCODE_COND_R = 0xc000,   // ']'
+	OPCODE_COND_L   = 0x8000, // '['
+	OPCODE_COND_R   = 0xc000, // ']'
+	OPCODE_ADD_PTR  = 0x2000, // '>', repetitions of
+	OPCODE_SUB_PTR  = 0x3000, // '<', repetitions of
 
-	OPCODE_COUNT = 8
+	OPCODE_COUNT = 10
 };
 
 namespace {
-const compile_assert< 8 == OPCODE_COUNT > assert_opcode_count;
+const compile_assert< 10 == OPCODE_COUNT > assert_opcode_count;
 } // namespace annonymous
 
 class Command {
-	uint16_t op; // encoding uses unsigned offset (direction determined by the type of op)
+	uint16_t op; // encoding uses unsigned immediates (direction determined by the type of op)
 
 	Command(); // undefined
 
 public:
-	enum { offset_range = 1 << 14 };
+	enum { branch_range = 1 << 14 };
+	enum { ptr_arith_range = 1 << 12 };
 
 	Command(
 		const Opcode an_op,
-		const uint16_t an_offset) {
+		const uint16_t an_imm) {
 
 		switch (an_op) {
 		case OPCODE_COND_L:
 		case OPCODE_COND_R:
-			op = an_op | an_offset;
+		case OPCODE_ADD_PTR:
+		case OPCODE_SUB_PTR:
+			op = an_op | an_imm;
 			break;
 		default:
 			op = an_op;
@@ -178,11 +183,19 @@ public:
 		if (op & uint16_t(0xc000))
 			return Opcode(op & uint16_t(0xc000));
 
+		// is this ptr arithmetics?
+		if (op & uint16_t(0x3000))
+			return Opcode(op & uint16_t(0x3000));
+
 		return Opcode(op);
 	}
 
 	uint16_t getOffset() const {
 		return op & ~uint16_t(0xc000);
+	}
+
+	uint16_t getArith() const {
+		return op & ~uint16_t(0x3000);
 	}
 };
 
@@ -220,8 +233,10 @@ static Command* translate(
 
 	size_t i = 0;
 	size_t j = 0;
+	bool err = false;
 
 	while (i < sourceLength) {
+		size_t imm;
 		switch (source[i]) {
 		case '+':
 			program[j++] = Command(OPCODE_INC_WORD, 0);
@@ -230,10 +245,22 @@ static Command* translate(
 			program[j++] = Command(OPCODE_DEC_WORD, 0);
 			break;
 		case '>':
-			program[j++] = Command(OPCODE_INC_PTR, 0);
+			for (imm = i + 1; imm < sourceLength && '>' == source[imm]; ++imm);
+			if (Command::ptr_arith_range <= imm - i) {
+				stream::cerr << "program error: way too many '>' at ip " << i << "\n";
+				err = true;
+			}
+			program[j++] = Command(OPCODE_ADD_PTR, uint16_t(imm - i));
+			i = imm - 1;
 			break;
 		case '<':
-			program[j++] = Command(OPCODE_DEC_PTR, 0);
+			for (imm = i + 1; imm < sourceLength && '<' == source[imm]; ++imm);
+			if (Command::ptr_arith_range <= imm - i) {
+				stream::cerr << "program error: way too many '<' at ip " << i << "\n";
+				err = true;
+			}
+			program[j++] = Command(OPCODE_SUB_PTR, uint16_t(imm - i));
+			i = imm - 1;
 			break;
 		case ',':
 			program[j++] = Command(OPCODE_INPUT, 0);
@@ -259,19 +286,23 @@ static Command* translate(
 				if (0 == offset)
 					break;
 
-				if (Command::offset_range > offset) {
+				if (Command::branch_range > offset) {
 					program[i] = Command(OPCODE_COND_L, uint16_t(offset));
 					program[i + offset] = Command(OPCODE_COND_R, uint16_t(offset));
 					continue;
 				}
 
-				stream::cerr << "program error: way too far jump at ip " << i << " - crash imminent\n";
+				stream::cerr << "program error: way too far jump at ip " << i << "\n";
+				err = true;
 		}
 
 	if (i != j) {
 		stream::cerr << "program error: unmached [ at ip " << i << "\n";
-		return 0;
+		err = true;
 	}
+
+	if (err)
+		return 0;
 
 	programLength = j;
 	return program;
@@ -380,12 +411,6 @@ int main(
 		case OPCODE_DEC_WORD:
 			--mem()[dp];
 			break;
-		case OPCODE_INC_PTR:
-			++dp;
-			break;
-		case OPCODE_DEC_PTR:
-			--dp;
-			break;
 		case OPCODE_INPUT:
 			stream::cin >> input;
 			mem()[dp] = word_t(input);
@@ -407,6 +432,12 @@ int main(
 		case OPCODE_COND_R:
 			if (0 != mem()[dp])
 				ip -= size_t(cmd.getOffset());
+			break;
+		case OPCODE_ADD_PTR:
+			dp += cmd.getArith();
+			break;
+		case OPCODE_SUB_PTR:
+			dp -= cmd.getArith();
 			break;
 		}
 
