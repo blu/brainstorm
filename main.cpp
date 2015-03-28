@@ -53,8 +53,7 @@ struct cli_param {
 	const char* filename;
 };
 
-static int
-parse_cli(
+static int __attribute__ ((noinline)) parse_cli(
 	const int argc,
 	char** const argv,
 	cli_param& param) {
