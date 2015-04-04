@@ -217,6 +217,18 @@ static size_t seekBalancedClose(
 	return 0;
 }
 
+static bool is_nop(const char op) {
+	return
+		op != '+' &&
+		op != '-' &&
+		op != '>' &&
+		op != '<' &&
+		op != '[' &&
+		op != ']' &&
+		op != ',' &&
+		op != '.';
+}
+
 static Command* __attribute__ ((noinline)) translate(
 	const char* const source,
 	const size_t sourceLength,
@@ -229,6 +241,8 @@ static Command* __attribute__ ((noinline)) translate(
 
 	while (i < sourceLength) {
 		size_t imm;
+		size_t skip;
+
 		switch (source[i]) {
 		case '+':
 			program[j++] = Command(OPCODE_INC_WORD, 0);
@@ -237,9 +251,15 @@ static Command* __attribute__ ((noinline)) translate(
 			program[j++] = Command(OPCODE_DEC_WORD, 0);
 			break;
 		case '>':
-			for (imm = i + 1; imm < sourceLength && '>' == source[imm]; ++imm);
-			if (Command::ptr_arith_range > imm - i) {
-				program[j++] = Command(OPCODE_ADD_PTR, uint16_t(imm - i));
+			for (imm = i + 1, skip = 0; imm < sourceLength; ++imm) {
+				if (is_nop(source[imm]))
+					++skip;
+				else
+				if ('>' != source[imm])
+					break;
+			}
+			if (Command::ptr_arith_range > imm - i - skip) {
+				program[j++] = Command(OPCODE_ADD_PTR, uint16_t(imm - i - skip));
 			}
 			else {
 				program[j++] = Command(OPCODE_ADD_PTR, 0);
@@ -249,9 +269,15 @@ static Command* __attribute__ ((noinline)) translate(
 			i = imm - 1;
 			break;
 		case '<':
-			for (imm = i + 1; imm < sourceLength && '<' == source[imm]; ++imm);
-			if (Command::ptr_arith_range > imm - i) {
-				program[j++] = Command(OPCODE_SUB_PTR, uint16_t(imm - i));
+			for (imm = i + 1, skip = 0; imm < sourceLength; ++imm) {
+				if (is_nop(source[imm]))
+					++skip;
+				else
+				if ('<' != source[imm])
+					break;
+			}
+			if (Command::ptr_arith_range > imm - i - skip) {
+				program[j++] = Command(OPCODE_SUB_PTR, uint16_t(imm - i - skip));
 			}
 			else {
 				program[j++] = Command(OPCODE_SUB_PTR, 0);
