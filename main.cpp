@@ -85,6 +85,7 @@ static int __attribute__ ((noinline)) parse_cli(
 			continue;
 		}
 
+#if ENABLE_DIAGNOSTICS
 		if (!std::strcmp(argv[i] + prefix_len, arg_terminal_count)) {
 			if (++i == argc || 1 != sscanf(argv[i], "%lu", &param.terminalCount))
 				success = false;
@@ -92,11 +93,14 @@ static int __attribute__ ((noinline)) parse_cli(
 			continue;
 		}
 
+#endif
+#if PRINT_ASCII == 0
 		if (!std::strcmp(argv[i] + prefix_len, arg_print_ascii)) {
 			param.flags |= size_t(cli_param::FLAG_PRINT_ASCII);
 			continue;
 		}
 
+#endif
 		success = false;
 	}
 
@@ -104,9 +108,16 @@ static int __attribute__ ((noinline)) parse_cli(
 		stream::cerr << "usage: " << argv[0] << " [<option> ...] <source_filename>\n"
 			"options (multiple args to an option must constitute a single string, eg. -foo \"a b c\"):\n"
 			"\t" << arg_prefix << arg_memory_size << " <positive_integer>\t\t: amount of memory available to program, in words; default is " << default_memory_size_kw << "Kwords\n"
-			"\t" << arg_prefix << arg_terminal_count << " <positive_integer>\t: number of steps after which program is forcefully terminated; default is " << default_terminal_count << "\n"
-			"\t" << arg_prefix << arg_print_ascii << "\t\t\t\t: print out in ASCII encoding rather than raw numbers\n";
 
+#if ENABLE_DIAGNOSTICS
+			"\t" << arg_prefix << arg_terminal_count << " <positive_integer>\t: number of steps after which program is forcefully terminated; default is " << default_terminal_count << "\n"
+
+#endif
+#if PRINT_ASCII == 0
+			"\t" << arg_prefix << arg_print_ascii << "\t\t\t\t: print in ASCII instead of numbers\n"
+
+#endif
+			;
 		return 1;
 	}
 
