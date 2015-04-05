@@ -304,22 +304,22 @@ static Command* __attribute__ ((noinline)) translate(
 	// calculate offsets
 	for (i = 0; i < j; ++i)
 		if (OPCODE_COND_L == program[i].getOp()) {
-				const size_t offset = seekBalancedClose(program + i, j - i);
+			const size_t offset = seekBalancedClose(program + i, j - i);
 
-				if (0 == offset) {
-					stream::cerr << "program error: unmached [ at ip " << i << "\n";
-					err = true;
-					break;
-				}
-
-				if (Command::branch_range > offset) {
-					program[i] = Command(OPCODE_COND_L, uint16_t(offset));
-					program[i + offset] = Command(OPCODE_COND_R, uint16_t(offset));
-					continue;
-				}
-
-				stream::cerr << "program error: way too far jump at ip " << i << "\n";
+			if (0 == offset) {
+				stream::cerr << "program error: unmached [ at ip " << i << "\n";
 				err = true;
+				break;
+			}
+
+			if (Command::branch_range > offset) {
+				program[i] = Command(OPCODE_COND_L, uint16_t(offset));
+				program[i + offset] = Command(OPCODE_COND_R, uint16_t(offset));
+				continue;
+			}
+
+			stream::cerr << "program error: way too far jump at ip " << i << "\n";
+			err = true;
 		}
 
 	if (err)
