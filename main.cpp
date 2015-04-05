@@ -418,10 +418,15 @@ int main(
 	size_t ip = 0;
 	size_t dp = 0;
 
+#if ENABLE_DIAGNOSTICS
 	while (count < terminalCount &&
 		   ip < programLength &&
 		   dp < dataLength) {
 
+#else
+	while (ip < programLength) {
+
+#endif
 		const Command cmd = program()[ip];
 		int input;
 
@@ -442,7 +447,10 @@ int main(
 			stream::cout << char(mem()[dp]);
 
 #else
-			stream::cout << mem()[dp] << " ";
+			if (print_ascii)
+				stream::cout << char(mem()[dp]);
+			else
+				stream::cout << mem()[dp] << " ";
 
 #endif
 			break;
@@ -466,11 +474,14 @@ int main(
 		++count;
 	}
 
+#if ENABLE_DIAGNOSTICS
 	if (dp >= dataLength) {
 		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip - 1 << "\n";
 		return -1;
 	}
 
 	stream::cout << "\ninstructions executed: " << count << "\n";
+
+#endif
 	return 0;
 }
