@@ -41,15 +41,9 @@ struct cli_param {
 	};
 	uint64_t terminalCount;
 
-#if BAD_CASE
 	uint32_t memorySize;
 	uint32_t flags;
 
-#else
-	uint64_t memorySize;
-	uint64_t flags;
-
-#endif
 	const char* filename;
 };
 
@@ -73,15 +67,9 @@ static int __attribute__ ((noinline)) parse_cli(
 		}
 
 		if (!std::strcmp(argv[i] + prefix_len, arg_memory_size)) {
-#if BAD_CASE
 			if (++i == argc || 1 != sscanf(argv[i], "%u", &param.memorySize))
 				success = false;
 
-#else
-			if (++i == argc || 1 != sscanf(argv[i], "%lu", &param.memorySize))
-				success = false;
-
-#endif
 			continue;
 		}
 
