@@ -21,9 +21,10 @@ Benchmarks
 
 Erik Bosman's mandelbrot generator:
 
-| CPU | compiler | time (real) |
-| AMD C-60 (Bobcat) @ 1.333GHz | clang++-3.5.2 | 0m37.074s |
-| AMD C-60 (Bobcat) @ 1.333GHz | g++-4.6.4 | 0m35.630s |
-| Freescale iMX53 (Cortex-A8) @ 1.0GHz | clang++-3.6.2 | 1m1.011s |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | clang++-3.5.0 | 0m17.189s |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | g++-4.8.2 | 0m17.139s |
+| CPU                                    | compiler      | time (real) |
+| -------------------------------------- | ------------- | ----------- |
+| AMD C-60 (Bobcat) @ 1.333GHz           | clang++-3.5.2 | 0m37.074s   |
+| AMD C-60 (Bobcat) @ 1.333GHz           | g++-4.6.4     | 0m35.630s   |
+| Freescale iMX53 (Cortex-A8) @ 1.0GHz   | clang++-3.6.2 | 1m1.011s    |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | clang++-3.5.0 | 0m17.189s   |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | g++-4.8.2     | 0m17.139s   |
