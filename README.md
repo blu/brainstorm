@@ -19,7 +19,7 @@ clang++-3.5. Or any other sane c++ compiler, i.e. some clang++ or g++ with a Goo
 Benchmarks
 ----------
 
-Erik Bosman's mandelbrot generator (times include printout):
+Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version):
 
 | CPU                                    | compiler      | time (real) |
 | -------------------------------------- | ------------- | ----------- |
@@ -30,6 +30,8 @@ Erik Bosman's mandelbrot generator (times include printout):
 | Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | clang++-3.5.0 | 0m17.189s   |
 | Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | g++-4.8.2     | 0m17.139s   |
 | Intel E3-1270v2 (Ivy Bridge) @ 3.90GHz | g++-4.8.2     | 0m7.033s    |
+| AppliedMicro X-Gene 1 @ 2.4GHz (alt)   | g++-4.9.1     | 0m19.608s   |
+| AppliedMicro X-Gene 1 @ 2.4GHz (alt)   | clang++-3.5.0 | 0m19.623s   |
 
 Musings
 -------
