@@ -19,19 +19,20 @@ clang++-3.5. Or any other sane c++ compiler, i.e. some clang++ or g++ with a Goo
 Benchmarks
 ----------
 
-Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version):
+Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version, 'alt^2' = alt_alt version):
 
-| CPU                                    | compiler      | time (real) |
-| -------------------------------------- | ------------- | ----------- |
-| AMD C-60 (Bobcat) @ 1.333GHz           | clang++-3.5.2 | 0m37.074s   |
-| AMD C-60 (Bobcat) @ 1.333GHz           | g++-4.6.4     | 0m35.630s   |
-| Freescale iMX53 (Cortex-A8) @ 1.0GHz   | clang++-3.6.2 | 1m0.941s    |
-| Freescale iMX53 (Cortex-A8) @ 1.0GHz   | g++-4.9.2     | 0m55.673s   |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | clang++-3.5.0 | 0m17.189s   |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz | g++-4.8.2     | 0m17.139s   |
-| Intel E3-1270v2 (Ivy Bridge) @ 3.90GHz | g++-4.8.2     | 0m7.033s    |
-| AppliedMicro X-Gene 1 @ 2.4GHz (alt)   | g++-4.9.1     | 0m19.608s   |
-| AppliedMicro X-Gene 1 @ 2.4GHz (alt)   | clang++-3.5.0 | 0m19.623s   |
+| CPU                                            | compiler      | time (real) |
+| ---------------------------------------------- | ------------- | ----------- |
+| AMD C-60 (Bobcat) @ 1.333GHz                   | clang++-3.5.2 | 0m37.074s   |
+| AMD C-60 (Bobcat) @ 1.333GHz                   | g++-4.6.4     | 0m35.630s   |
+| Freescale iMX53 (Cortex-A8) @ 1.0GHz           | clang++-3.6.2 | 1m0.941s    |
+| Freescale iMX53 (Cortex-A8) @ 1.0GHz           | g++-4.9.2     | 0m55.673s   |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz         | clang++-3.5.0 | 0m17.189s   |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz         | g++-4.8.2     | 0m17.139s   |
+| Intel E3-1270v2 (Ivy Bridge) @ 3.90GHz         | g++-4.8.2     | 0m7.033s    |
+| AppliedMicro X-Gene 1 @ 2.4GHz (alt)           | g++-4.9.1     | 0m19.608s   |
+| AppliedMicro X-Gene 1 @ 2.4GHz (alt)           | clang++-3.5.0 | 0m19.623s   |
+| Rockchip RK3368 (Cortex-A53) @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s   |
 
 Musings
 -------
