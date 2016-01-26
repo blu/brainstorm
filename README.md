@@ -27,12 +27,25 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AMD C-60 (Bobcat) @ 1.333GHz                   | g++-4.6.4     | 0m35.630s   |
 | Freescale iMX53 (Cortex-A8) @ 1.0GHz           | clang++-3.6.2 | 1m0.941s    |
 | Freescale iMX53 (Cortex-A8) @ 1.0GHz           | g++-4.9.2     | 0m55.673s   |
+| Intel E5-2687W (Sandy Bridge) @ 3.10GHz        | clang++-3.6.2 | 0m9.390s    |
+| Intel E5-2687W (Sandy Bridge) @ 3.10GHz        | g++-4.7.2     | 0m9.946s    |
 | Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz         | clang++-3.5.0 | 0m17.189s   |
 | Intel E3-1270v2 (Ivy Bridge) @ 1.60GHz         | g++-4.8.2     | 0m17.139s   |
 | Intel E3-1270v2 (Ivy Bridge) @ 3.90GHz         | g++-4.8.2     | 0m7.033s    |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)           | g++-4.9.1     | 0m19.608s   |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)           | clang++-3.5.0 | 0m19.623s   |
 | Rockchip RK3368 (Cortex-A53) @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s   |
+
+Normalized performance from the above (ticks = duration x CPU_GHz; lower is better)
+
+| CPU                                            | compiler      | ticks       |
+|----------------------------------------------- | ------------- | ----------- |
+| AMD C-60 (Bobcat)                              | g++-4.6.4     | 47.49       |
+| Freescale iMX53 (Cortex-A8)                    | g++-4.9.2     | 55.67       |
+| Intel E5-2687W (Sandy Bridge)                  | clang++-3.6.2 | 29.11       |
+| Intel E3-1270v2 (Ivy Bridge)                   | g++-4.8.2     | 27.42       |
+| AppliedMicro X-Gene 1 (alt)                    | g++-4.9.1     | 47.06       |
+| Rockchip RK3368 (Cortex-A53) (alt^2)           | g++-4.9.3     | 49.26       |
 
 Musings
 -------
