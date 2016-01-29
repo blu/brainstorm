@@ -44,10 +44,6 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 
 Normalized performance from the above (ticks = duration x CPU_GHz; lower is better)
 
-CPU variant     : 0x2
-CPU part        : 0xc08
-CPU revision    : 5
-
 | CPU                                                 | compiler      | ticks       |
 |---------------------------------------------------- | ------------- | ----------- |
 | AMD C-60 (Bobcat)                                   | g++-4.6.4     | 47.49       |
