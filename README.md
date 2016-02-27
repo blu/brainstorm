@@ -33,8 +33,9 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel i7-2600 (Sandy Bridge) @ 3.8GHz               | g++-5.3.0     | 0m8.350s    |
 | Intel E5-2687W (Sandy Bridge) @ 3.1GHz              | clang++-3.6.2 | 0m9.390s    |
 | Intel E5-2687W (Sandy Bridge) @ 3.1GHz              | g++-4.7.2     | 0m9.946s    |
+| Intel i5-3470S (Ivy Bridge) @ 1.6GHz                | g++-4.8.2     | 0m17.087s   |
 | Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz               | clang++-3.5.0 | 0m17.189s   |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz               | g++-4.8.2     | 0m17.139s   |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz               | g++-4.8.2     | 0m17.116s   |
 | Intel E3-1270v2 (Ivy Bridge) @ 3.9GHz               | g++-4.8.2     | 0m7.033s    |
 | Intel i7-5820K (Haswell) @ 3.6GHz                   | clang++-3.6.x | 0m7.276s    |
 | Intel i7-5820K (Haswell) @ 3.6GHz                   | g++-4.8.x     | 0m6.905s    |
