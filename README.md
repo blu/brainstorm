@@ -9,6 +9,7 @@ How to Build
 ------------
 
 Running the build.sh script in the respective directiory builds the executable, if you happen to have clang++-3.5 (hardcoded in the script -- substitute for your preferred compiler).
+
 There are three versions of the interpreter -- vanilla, alt and alt-alt. They differ by minor tweaks to the interpeter loop, which can benefit some combinations of microarchitectures and compilers. The vanilla version is built by default; to build the alt version, pass '\_alt' as an arg to the build script, and to build the alt-alt version, pass '\_alt\_alt', respectively.
 
 Benchmarks
