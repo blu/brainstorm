@@ -40,7 +40,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | clang++-3.5.0 | 0m19.623s   |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | g++-4.9.1     | 0m19.608s   |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s   |
-| Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.5.0 | 0m35.121s   |
+| Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.5.0 | 0m34.209s   |
 
 Normalized performance from the above (ticks = duration x CPU\_GHz; lower is better)
 
