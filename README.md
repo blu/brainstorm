@@ -44,7 +44,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 
 [^1]: There is a compiler snafu in the code generated for the interpereter loop:
 
-<code>
+<pre><code>
   400f00:       787a7aa8        ldrh    w8, [x21,x26,lsl #1]
   400f04:       12000909        and     w9, w8, #0x7
   400f08:       71001d3f        cmp     w9, #0x7            // since we just AND'd its source register with 7, there's no chance w9 could be larger than 7,
@@ -54,7 +54,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
   400f9c:       9100075a        add     x26, x26, #0x1
   400fa0:       eb08035f        cmp     x26, x8
   400fa4:       54fffae3        b.cc    400f00
-</code>
+</code></pre>
 
 Normalized performance from the above (ticks = duration x CPU\_GHz; lower is better)
 
