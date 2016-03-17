@@ -409,7 +409,13 @@ int main(
 		const Command cmd = program()[ip];
 		int input;
 
-		switch (cmd.getOp()) {
+		const uint32_t op = cmd.getOp();
+
+#if __clang_major__ > 3 || __clang_major__ == 3 && __clang_minor__ >= 6
+		__builtin_assume(op < 8);
+
+#endif
+		switch (op) {
 		case OPCODE_INC_WORD:
 			++mem()[dp];
 			break;
