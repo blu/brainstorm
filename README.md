@@ -43,8 +43,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0 | 0m30.224s [^1] |
 | MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)  | g++-4.9.2     | 0m36.048s [^2] |
 
-[^1]: There two compiler snafus in the code generated for the interpereter loop. First, the
-loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
+[^1]: There are two compiler snafus in the code generated for the interpereter loop. First,
+the loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
 loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
 <pre><code>
