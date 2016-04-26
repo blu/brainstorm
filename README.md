@@ -41,8 +41,11 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | g++-4.9.1     | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0 | 0m30.224s [^1] |
+| MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.50GHz (alt^2) | clang++-3.6.0 | 0m54.279s [^2] |
 
-[^1]: There is a compiler snafu in the code generated for the interpereter loop:
+[^1]: There two compiler snafus in the code generated for the interpereter loop. First, the
+loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
+loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
 <pre><code>
   400f00:       787a7aa8        ldrh    w8, [x21,x26,lsl #1]
@@ -55,6 +58,13 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
   400fa0:       eb08035f        cmp     x26, x8
   400fa4:       54fffae3        b.cc    400f00
 </code></pre>
+
+[^2]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and
+as such is subject to the following performance detriments:
+
+	(1) Power management causes cores to pop in and out of existence, instead of just scaling them by frequency.
+	(2) Although with an aarch64 kernel, the user space is strictly armhf, and so is the tested code.
+	(3) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
 Normalized performance from the above (ticks = duration x CPU\_GHz; lower is better)
 
