@@ -71,16 +71,16 @@ Normalized performance from the above (ticks = duration x CPU\_GHz; lower is bet
 
 | CPU                                                 | compiler      | ticks       |
 |---------------------------------------------------- | ------------- | ----------- |
-| AMD C-60 (Bobcat)                                   | g++-4.6.4     | 47.49       |
 | Freescale iMX53 (Cortex-A8 r2p5)                    | g++-4.9.2     | 55.67       |
+| AMD C-60 (Bobcat)                                   | g++-4.6.4     | 47.49       |
+| AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1     | 47.06       |
+| Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0 | 45.64       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x | 40.48       |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2 | 40.13       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0     | 31.73       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2 | 29.11       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2     | 27.42       |
 | Intel i7-5820K (Haswell)                            | g++-4.8.x     | 24.86       |
-| AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1     | 47.06       |
-| Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0 | 45.64       |
 
 Musings
 -------
