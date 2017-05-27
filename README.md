@@ -42,6 +42,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0 | 0m30.224s [^1] |
 | MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)  | g++-4.9.2     | 0m34.220s [^2] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.871s      |
 
 [^1]: There are two compiler snafus in the code generated for the interpereter loop. First,
 the loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
@@ -73,6 +74,7 @@ Normalized performance from the above (ticks = duration x CPU\_GHz; lower is bet
 | AMD C-60 (Bobcat)                                   | g++-4.6.4     | 47.49       |
 | Freescale iMX53 (Cortex-A8 r2p5)                    | g++-4.9.2     | 55.67       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x | 40.48       |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2 | 40.13       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0     | 31.73       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2 | 29.11       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2     | 27.42       |
