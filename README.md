@@ -21,6 +21,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | ---------------------------------------------------     | ------------- | -------------- |
 | AMD C-60 (Bobcat) @ 1.333GHz                            | clang++-3.5.2 | 0m37.074s      |
 | AMD C-60 (Bobcat) @ 1.333GHz                            | g++-4.6.4     | 0m35.630s      |
+| AMD Ryzen 1700 (Zen) @ 3.0GHz                           | g++-6.3.0     | 0m9.54s        |
+| AMD Ryzen 1700X (Zen) @ 2.2GHz                          | g++-4.9.2     | 0m11.81s       |
 | Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | clang++-3.6.2 | 1m0.941s       |
 | Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | g++-4.9.2     | 0m55.673s      |
 | Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz            | clang++-3.7.x | 0m12.650s      |
@@ -80,7 +82,9 @@ Normalized performance from the above (ticks = duration x CPU\_GHz; lower is bet
 | Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2 | 40.07       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0     | 31.73       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2 | 29.11       |
+| AMD Ryzen 1700 (Zen)                                | g++-6.3.0     | 28.62       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2     | 27.42       |
+| AMD Ryzen 1700X (Zen)                               | g++-4.9.2     | 25.98       |
 | Intel i7-5820K (Haswell)                            | g++-4.8.x     | 24.86       |
 
 Musings
