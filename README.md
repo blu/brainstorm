@@ -48,7 +48,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.836s      |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2 | 0m20.035s      |
 
-[^1]: Non-native compiler tuning -march=corei7
+[^1]: Non-native compiler tuning -march=corei7  
 [^2]: There are two compiler snafus in the code generated for the interpereter loop. First,
 the loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
 loop to get optimal loop alignment. Second, the code generated for the loop could be better:
