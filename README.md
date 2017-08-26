@@ -45,6 +45,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0 | 0m30.224s [^2] |
 | MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)  | g++-4.9.2     | 0m34.220s [^3] |
+| MediaTek MT8163 (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)  | clang++-3.6.2 | 0m31.196s [^3] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.836s [^4] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2 | 0m20.035s [^4] |
 
@@ -69,8 +70,7 @@ loop to get optimal loop alignment. Second, the code generated for the loop coul
 as such is subject to the following performance detriments:
 
 	(1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.
-	(2) Although featuring an aarch64 kernel, the tablet's user space is strictly armhf, and so is the tested code.
-	(3) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
+	(2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
 [^4]: Non-native compiler tuning -march=cortex-a57
 
