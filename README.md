@@ -49,7 +49,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.836s [^4] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2 | 0m20.035s [^4] |
 
-[^1]: Generic compiler tuning  
+[^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
 [^3]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
 
@@ -72,7 +72,7 @@ Note: There are two compiler snafus in all A64 alt-alt entries built by clang. F
 400fa4:       54fffae3        b.cc    400f00
 ```
 
-Normalized performance from the above `ticks = duration x CPU_GHz` (lower is better):
+Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is better):
 
 | CPU                                                 | compiler      | ticks       |
 |---------------------------------------------------- | ------------- | ----------- |
