@@ -19,11 +19,11 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 
 | CPU                                                     | compiler      | time (real)    |
 | ---------------------------------------------------     | ------------- | -------------- |
-| AMD C-60 (Bobcat) @ 1.333GHz                            | clang++-3.5.2 | 0m37.074s      |
-| AMD C-60 (Bobcat) @ 1.333GHz                            | g++-4.6.4     | 0m35.630s      |
+| AMD C-60 (Bobcat) @ 1.333GHz                            | clang++-3.5.2 | 0m36.497s [^1] |
+| AMD C-60 (Bobcat) @ 1.333GHz                            | g++-4.8.4     | 0m34.668s [^1] |
 | AMD A8-7600 (Steamroller) @ 2.4GHz                      | clang++-3.5.2 | 0m16.720s      |
 | AMD Ryzen 1700 (Zen) @ 3.0GHz                           | g++-6.3.0     | 0m9.54s        |
-| AMD Ryzen 1700X (Zen) @ 2.2GHz                          | g++-4.9.2     | 0m11.81s  [^1] |
+| AMD Ryzen 1700X (Zen) @ 2.2GHz                          | g++-4.9.2     | 0m11.81s  [^2] |
 | Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | clang++-3.6.2 | 1m0.941s       |
 | Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | g++-4.9.2     | 0m55.673s      |
 | Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz            | clang++-3.7.x | 0m12.650s      |
@@ -43,44 +43,43 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | clang++-3.5.0 | 0m19.623s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | g++-4.9.1     | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3     | 0m32.623s      |
-| Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0 | 0m30.224s [^2] |
-| MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)  | g++-4.9.2     | 0m34.220s [^3] |
-| MediaTek MT8163 (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)  | clang++-3.6.2 | 0m31.196s [^3] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.836s [^4] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2 | 0m20.035s [^4] |
+| Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0 | 0m30.224s [^3] |
+| MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)  | g++-4.9.2     | 0m34.220s [^4] |
+| MediaTek MT8163 (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)  | clang++-3.6.2 | 0m31.196s [^4] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.836s [^5] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2 | 0m20.035s [^5] |
 
-[^1]: Non-native compiler tuning -march=corei7  
-[^2]: There are two compiler snafus in the code generated for the interpereter loop. First,
+[^1]: Generic compiler tuning  
+[^2]: Non-native compiler tuning -march=corei7  
+[^3]: There are two compiler snafus in the code generated for the interpereter loop. First,
 the loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
 loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
-```
-  400f00:       787a7aa8        ldrh    w8, [x21,x26,lsl #1]
-  400f04:       12000909        and     w9, w8, #0x7
-  400f08:       71001d3f        cmp     w9, #0x7            // since we just AND'd its source register with 7, there's no chance w9 could be larger than 7,
-  400f0c:       54000468        b.hi    400f98              // so this pair of ops is essentially nops in the innermost loop; check if fixed in newer clangs
-  ...
-  400f98:       f94007e8        ldr     x8, [sp,#8]
-  400f9c:       9100075a        add     x26, x26, #0x1
-  400fa0:       eb08035f        cmp     x26, x8
-  400fa4:       54fffae3        b.cc    400f00
-```
+	400f00:       787a7aa8        ldrh    w8, [x21,x26,lsl #1]
+	400f04:       12000909        and     w9, w8, #0x7
+	400f08:       71001d3f        cmp     w9, #0x7            // since we just AND'd its source register with 7, there's no chance w9 could be larger than 7,
+	400f0c:       54000468        b.hi    400f98              // so this pair of ops is essentially nops in the innermost loop; check if fixed in newer clangs
+	...
+	400f98:       f94007e8        ldr     x8, [sp,#8]
+	400f9c:       9100075a        add     x26, x26, #0x1
+	400fa0:       eb08035f        cmp     x26, x8
+	400fa4:       54fffae3        b.cc    400f00
 
-[^3]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and
+[^4]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and
 as such is subject to the following performance detriments:
 
 	(1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
 	(2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
-[^4]: Non-native compiler tuning -march=cortex-a57
+[^5]: Non-native compiler tuning -march=cortex-a57
 
 Normalized performance from the above (ticks = duration x CPU\_GHz; lower is better)
 
 | CPU                                                 | compiler      | ticks       |
 |---------------------------------------------------- | ------------- | ----------- |
 | Freescale iMX53 (Cortex-A8 r2p5)                    | g++-4.9.2     | 55.67       |
-| AMD C-60 (Bobcat)                                   | g++-4.6.4     | 47.49       |
 | AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1     | 47.06       |
+| AMD C-60 (Bobcat)                                   | g++-4.8.4     | 46.21       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0 | 45.64       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x | 40.48       |
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2 | 40.13       |
