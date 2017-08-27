@@ -8,14 +8,14 @@ Other than that brainstorm does two very basic optimisations on the code: homoge
 How to Build
 ------------
 
-Running the build.sh script in the respective directiory builds the executable, if you happen to have clang++-3.6 (hardcoded in the script -- substitute for your preferred compiler).
+Running the build.sh script in the source directiory builds the executable, if you happen to have clang++-3.6 (hardcoded in the script -- substitute for your preferred compiler).
 
-There are three versions of the interpreter -- vanilla, alt and alt-alt. They differ by minor tweaks to the interpeter loop, which can benefit some combinations of microarchitectures and compilers. The vanilla version is built by default; to build the alt version, pass '\_alt' as an arg to the build script, and to build the alt-alt version, pass '\_alt\_alt', respectively.
+There are three versions of the interpreter -- vanilla, alt and alt-alt. They differ by minor tweaks to the interpeter loop, which can benefit some combinations of microarchitectures and compilers. The vanilla version is built by default; to build the alt version, pass `_alt` as an arg to the build script, and to build the alt-alt version, pass `_alt_alt`, respectively.
 
 Benchmarks
 ----------
 
-Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version, 'alt^2' = alt\_alt version):
+Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version, 'alt^2' = alt-alt version):
 
 | CPU                                                     | compiler      | time (real)    |
 | ---------------------------------------------------     | ------------- | -------------- |
@@ -55,17 +55,15 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 the loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the
 loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
-    ```
-    400f00:       787a7aa8        ldrh    w8, [x21,x26,lsl #1]  
-    400f04:       12000909        and     w9, w8, #0x7  
-    400f08:       71001d3f        cmp     w9, #0x7            // since we just AND'd its source register with 7, there's no chance w9 could be larger than 7,  
-    400f0c:       54000468        b.hi    400f98              // so this pair of ops is essentially nops in the innermost loop; check if fixed in newer clangs  
-    ...  
-    400f98:       f94007e8        ldr     x8, [sp,#8]  
-    400f9c:       9100075a        add     x26, x26, #0x1  
-    400fa0:       eb08035f        cmp     x26, x8  
-    400fa4:       54fffae3        b.cc    400f00  
-    ```
+    `400f00:       787a7aa8        ldrh    w8, [x21,x26,lsl #1]`
+    `400f04:       12000909        and     w9, w8, #0x7`
+    `400f08:       71001d3f        cmp     w9, #0x7            // since we just AND'd its source register with 7, w9 could not be larger than 7,`
+    `400f0c:       54000468        b.hi    400f98              // so this pair of ops is essentially nops in the innermost loop`
+    `...`
+    `400f98:       f94007e8        ldr     x8, [sp,#8]`
+    `400f9c:       9100075a        add     x26, x26, #0x1`
+    `400fa0:       eb08035f        cmp     x26, x8`
+    `400fa4:       54fffae3        b.cc    400f00`
 
 [^4]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and
 as such is subject to the following performance detriments:
@@ -75,7 +73,7 @@ as such is subject to the following performance detriments:
 
 [^5]: Non-native compiler tuning -march=cortex-a57
 
-Normalized performance from the above (ticks = duration x CPU\_GHz; lower is better)
+Normalized performance from the above `ticks = duration x CPU_GHz` (lower is better):
 
 | CPU                                                 | compiler      | ticks       |
 |---------------------------------------------------- | ------------- | ----------- |
