@@ -49,6 +49,15 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2 | 0m30.836s [^4] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2 | 0m20.035s [^4] |
 
+[^1]: Generic compiler tuning  
+[^2]: Non-native compiler tuning -march=corei7  
+[^3]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
+
+    (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
+    (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
+
+[^4]: Non-native compiler tuning -mcpu=cortex-a57
+
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
 ```
@@ -62,15 +71,6 @@ Note: There are two compiler snafus in all A64 alt-alt entries built by clang. F
 400fa0:       eb08035f        cmp     x26, x8
 400fa4:       54fffae3        b.cc    400f00
 ```
-
-[^1]: Generic compiler tuning  
-[^2]: Non-native compiler tuning -march=corei7  
-[^3]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
-
-    (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
-    (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
-
-[^4]: Non-native compiler tuning -mcpu=cortex-a57
 
 Normalized performance from the above `ticks = duration x CPU_GHz` (lower is better):
 
