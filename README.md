@@ -41,7 +41,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel E3-1270v2 (Ivy Bridge) @ 3.9GHz                   | g++-4.8.2           | 0m7.033s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                       | clang++-3.6.x       | 0m7.276s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                       | g++-4.8.x           | 0m6.905s       |
-| Allwinner A64 (Cortex-A53 r0p4) @ 1.152GHz (alt)        | clang++-3.6.2       | 0m40.848s      |
+| Allwinner A64 (Cortex-A53 r0p4) @ 1.152GHz (alt)        | clang++-3.6.2       | 0m40.832s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | clang++-3.5.0       | 0m19.623s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | g++-4.9.1           | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3           | 0m32.623s      |
@@ -79,8 +79,8 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | CPU                                                 | compiler            | ticks       |
 |---------------------------------------------------- | ------------------- | ----------- |
 | Freescale iMX53 (Cortex-A8 r2p5)                    | g++-4.9.2           | 55.67       |
-| Allwinner A64 (Cortex-A53 r0p4) (alt)               | clang++-3.6.2       | 47.06       |
 | AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1           | 47.06       |
+| Allwinner A64 (Cortex-A53 r0p4) (alt)               | clang++-3.6.2       | 47.04       |
 | MediaTek MT8163 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.2       | 46.79       |
 | AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.21       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
