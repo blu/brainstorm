@@ -28,7 +28,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | g++-4.9.2           | 0m55.673s      |
 | Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz            | clang++-3.7.x       | 0m12.650s      |
 | Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz            | g++-4.9.2           | 0m16.430s      |
-| Intel Core2 Duo P8600 (Penryn) @ 2.4GHz (alt^2)         | apple clang++-8.1.0 | 0m13.441s      |
+| Intel Core2 Duo P8600 (Penryn) @ 2.4GHz (alt^2)         | apple clang++-8.1.0 | 0m13.383s      |
 | Intel i7-2600 (Sandy Bridge) @ 3.8GHz                   | clang++-3.7.1       | 0m9.200s       |
 | Intel i7-2600 (Sandy Bridge) @ 3.8GHz                   | g++-5.3.0           | 0m8.350s       |
 | Intel E5-2687W (Sandy Bridge) @ 3.1GHz                  | clang++-3.6.2       | 0m9.390s       |
@@ -87,7 +87,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2       | 40.07       |
-| Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.26       |
+| Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
 | AMD Ryzen 1700 (Zen)                                | g++-6.3.0           | 28.62       |
