@@ -17,41 +17,42 @@ Benchmarks
 
 Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version, 'alt^2' = alt-alt version):
 
-| CPU                                                     | compiler            | time (real)    |
-| ------------------------------------------------------- | ------------------- | -------------- |
-| AMD C-60 (Bobcat) @ 1.333GHz                            | clang++-3.5.2       | 0m36.497s [^1] |
-| AMD C-60 (Bobcat) @ 1.333GHz                            | g++-4.8.4           | 0m34.668s [^1] |
-| AMD A8-7600 (Steamroller) @ 2.4GHz                      | clang++-3.5.2       | 0m16.720s      |
-| AMD Ryzen 1700 (Zen) @ 3.0GHz                           | g++-6.3.0           | 0m9.54s        |
-| AMD Ryzen 1700X (Zen) @ 2.2GHz                          | g++-4.9.2           | 0m11.81s  [^2] |
-| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | clang++-3.6.2       | 1m0.941s       |
-| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz               | g++-4.9.2           | 0m55.673s      |
-| Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz            | clang++-3.7.x       | 0m12.650s      |
-| Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz            | g++-4.9.2           | 0m16.430s      |
-| Intel Core2 Duo P8600 (Penryn) @ 2.4GHz (alt^2)         | apple clang++-8.1.0 | 0m13.383s      |
-| Intel i7-2600 (Sandy Bridge) @ 3.8GHz                   | clang++-3.7.1       | 0m9.200s       |
-| Intel i7-2600 (Sandy Bridge) @ 3.8GHz                   | g++-5.3.0           | 0m8.350s       |
-| Intel E5-2687W (Sandy Bridge) @ 3.1GHz                  | clang++-3.6.2       | 0m9.390s       |
-| Intel E5-2687W (Sandy Bridge) @ 3.1GHz                  | g++-4.7.2           | 0m9.946s       |
-| Intel i5-3470S (Ivy Bridge) @ 1.6GHz                    | g++-4.8.2           | 0m17.087s      |
-| Intel i5-3570 (Ivy Bridge) @ 1.6GHz                     | g++-4.8.4           | 0m17.086s      |
-| Intel i5-3570 (Ivy Bridge) @ 3.8GHz                     | g++-4.8.4           | 0m7.200s       |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                   | clang++-3.5.0       | 0m17.189s      |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                   | g++-4.8.2           | 0m17.116s      |
-| Intel E3-1270v2 (Ivy Bridge) @ 3.9GHz                   | g++-4.8.2           | 0m7.033s       |
-| Intel i7-5820K (Haswell) @ 3.6GHz                       | clang++-3.6.x       | 0m7.276s       |
-| Intel i7-5820K (Haswell) @ 3.6GHz                       | g++-4.8.x           | 0m6.905s       |
-| Allwinner A64 (Cortex-A53 r0p4) @ 1.152GHz (alt)        | clang++-3.6.2       | 0m40.832s      |
-| AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | clang++-3.5.0       | 0m19.623s      |
-| AppliedMicro X-Gene 1 @ 2.4GHz (alt)                    | g++-4.9.1           | 0m19.608s      |
-| Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2) | g++-4.9.3           | 0m32.623s      |
-| Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2) | clang++-3.6.0       | 0m30.224s      |
-| MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)  | g++-4.9.2           | 0m34.220s [^3] |
-| MediaTek MT8163 (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)  | clang++-3.6.2       | 0m31.196s [^3] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz      | clang++-3.5.2       | 0m30.836s [^4] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz      | clang++-3.5.2       | 0m20.035s [^4] |
-| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz         | clang++-5.0.1       | 0m19.083s [^4] |
-| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2) | g++-7.2.1           | 0m14.019s [^4] |
+| CPU                                                        | compiler            | time (real)    |
+| ---------------------------------------------------------- | ------------------- | -------------- |
+| AMD C-60 (Bobcat) @ 1.333GHz                               | clang++-3.5.2       | 0m36.497s [^1] |
+| AMD C-60 (Bobcat) @ 1.333GHz                               | g++-4.8.4           | 0m34.668s [^1] |
+| AMD A8-7600 (Steamroller) @ 2.4GHz                         | clang++-3.5.2       | 0m16.720s      |
+| AMD Ryzen 1700 (Zen) @ 3.0GHz                              | g++-6.3.0           | 0m9.54s        |
+| AMD Ryzen 1700X (Zen) @ 2.2GHz                             | g++-4.9.2           | 0m11.81s  [^2] |
+| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz                  | clang++-3.6.2       | 1m0.941s       |
+| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz                  | g++-4.9.2           | 0m55.673s      |
+| Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz               | clang++-3.7.x       | 0m12.650s      |
+| Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz               | g++-4.9.2           | 0m16.430s      |
+| Intel Core2 Duo P8600 (Penryn) @ 2.4GHz (alt^2)            | apple clang++-8.1.0 | 0m13.383s      |
+| Intel i7-2600 (Sandy Bridge) @ 3.8GHz                      | clang++-3.7.1       | 0m9.200s       |
+| Intel i7-2600 (Sandy Bridge) @ 3.8GHz                      | g++-5.3.0           | 0m8.350s       |
+| Intel E5-2687W (Sandy Bridge) @ 3.1GHz                     | clang++-3.6.2       | 0m9.390s       |
+| Intel E5-2687W (Sandy Bridge) @ 3.1GHz                     | g++-4.7.2           | 0m9.946s       |
+| Intel i5-3470S (Ivy Bridge) @ 1.6GHz                       | g++-4.8.2           | 0m17.087s      |
+| Intel i5-3570 (Ivy Bridge) @ 1.6GHz                        | g++-4.8.4           | 0m17.086s      |
+| Intel i5-3570 (Ivy Bridge) @ 3.8GHz                        | g++-4.8.4           | 0m7.200s       |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                      | clang++-3.5.0       | 0m17.189s      |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                      | g++-4.8.2           | 0m17.116s      |
+| Intel E3-1270v2 (Ivy Bridge) @ 3.9GHz                      | g++-4.8.2           | 0m7.033s       |
+| Intel i7-5820K (Haswell) @ 3.6GHz                          | clang++-3.6.x       | 0m7.276s       |
+| Intel i7-5820K (Haswell) @ 3.6GHz                          | g++-4.8.x           | 0m6.905s       |
+| Allwinner A64 (Cortex-A53 r0p4) @ 1.152GHz (alt)           | clang++-3.6.2       | 0m40.832s      |
+| AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | clang++-3.5.0       | 0m19.623s      |
+| AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
+| Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2)    | g++-4.9.3           | 0m32.623s      |
+| Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2)    | clang++-3.6.0       | 0m30.224s      |
+| MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)     | g++-4.9.2           | 0m34.220s [^3] |
+| MediaTek MT8163 (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)     | clang++-3.6.2       | 0m31.196s [^3] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^4] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^4] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^4] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^4] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.019s [^4] |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
@@ -88,9 +89,9 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1)               | clang++-3.5.2       | 40.07       |
 | Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)       | g++-7.2.1           | 29.51       |
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.44       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
 | AMD Ryzen 1700 (Zen)                                | g++-6.3.0           | 28.62       |
