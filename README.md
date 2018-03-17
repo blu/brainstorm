@@ -46,8 +46,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2)    | g++-4.9.3           | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2)    | clang++-3.6.0       | 0m30.224s      |
-| MediaTek MT8163 (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)     | g++-4.9.2           | 0m34.220s [^3] |
-| MediaTek MT8163 (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)     | clang++-3.6.2       | 0m31.196s [^3] |
+| MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m34.220s [^3] |
+| MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m31.196s [^3] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^4] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^4] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^4] |
@@ -56,7 +56,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
-[^3]: This MT8163 is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
+[^3]: This MT8163A is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
 
     (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
     (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
@@ -84,7 +84,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Freescale iMX53 (Cortex-A8 r2p5)                    | g++-4.9.2           | 55.67       |
 | AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1           | 47.06       |
 | Allwinner A64 (Cortex-A53 r0p4) (alt)               | clang++-3.6.2       | 47.04       |
-| MediaTek MT8163 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.2       | 46.79       |
+| MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)          | clang++-3.6.2       | 46.79       |
 | AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.21       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
