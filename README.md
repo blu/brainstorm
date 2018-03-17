@@ -37,7 +37,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel i5-3570 (Ivy Bridge) @ 1.6GHz                        | g++-4.8.4           | 0m17.086s      |
 | Intel i5-3570 (Ivy Bridge) @ 3.8GHz                        | g++-4.8.4           | 0m7.200s       |
 | Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                      | clang++-3.5.0       | 0m17.189s      |
-| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                      | g++-4.8.2           | 0m17.116s      |
+| Intel E3-1270v2 (Ivy Bridge) @ 1.6GHz                      | g++-4.8.2           | 0m17.088s      |
 | Intel E3-1270v2 (Ivy Bridge) @ 3.9GHz                      | g++-4.8.2           | 0m7.033s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                          | clang++-3.6.x       | 0m7.276s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                          | g++-4.8.x           | 0m6.905s       |
@@ -95,7 +95,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.44       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
 | AMD Ryzen 1700 (Zen)                                | g++-6.3.0           | 28.62       |
-| Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.42       |
+| Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
 | AMD Ryzen 1700X (Zen)                               | g++-4.9.2           | 25.98       |
 | Intel i7-5820K (Haswell)                            | g++-4.8.x           | 24.86       |
 
