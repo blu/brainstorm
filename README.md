@@ -42,7 +42,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel i7-5820K (Haswell) @ 3.6GHz                          | clang++-3.6.x       | 0m7.276s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                          | g++-4.8.x           | 0m6.905s       |
 | Samsung Exynos 5422 (Cortex-A15 r2p3) @ 2.0GHz             | clang++-3.6.2       | 0m28.754s      |
-| Samsung Exynos 5422 (Cortex-A15 r2p3) @ 2.0GHz             | g++-6.3.0           | 0m20.805s      |
+| Samsung Exynos 5422 (Cortex-A15 r2p3) @ 1.3GHz             | g++-6.3.0           | 0m31.921s [^5] |
 | Allwinner A64 (Cortex-A53 r0p4) @ 1.152GHz (alt)           | clang++-3.6.2       | 0m40.832s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | clang++-3.5.0       | 0m19.623s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
@@ -64,6 +64,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
     (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
 [^4]: Non-native compiler tuning -mcpu=cortex-a57
+[^5]: Non-native compiler tuning -mcpu=cortex-a7
 
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
@@ -89,7 +90,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)          | clang++-3.6.2       | 46.79       |
 | AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.21       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
-| Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 41.61       |
+| Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 41.50       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
 | Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
