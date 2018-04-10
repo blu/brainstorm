@@ -19,13 +19,11 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 
 | CPU                                                        | compiler            | time (real)    |
 | ---------------------------------------------------------- | ------------------- | -------------- |
-| AMD C-60 (Bobcat) @ 1.333GHz                               | clang++-3.5.2       | 0m36.497s [^1] |
-| AMD C-60 (Bobcat) @ 1.333GHz                               | g++-4.8.4           | 0m34.668s [^1] |
+| AMD C-60 (Bobcat) @ 1.33GHz                                | clang++-3.5.2       | 0m36.497s [^1] |
+| AMD C-60 (Bobcat) @ 1.33GHz                                | g++-4.8.4           | 0m34.668s [^1] |
 | AMD A8-7600 (Steamroller) @ 2.4GHz                         | clang++-3.5.2       | 0m16.720s      |
 | AMD Ryzen 1700 (Zen) @ 3.0GHz                              | g++-6.3.0           | 0m9.54s        |
 | AMD Ryzen 1700X (Zen) @ 2.2GHz                             | g++-4.9.2           | 0m11.81s  [^2] |
-| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz                  | clang++-3.6.2       | 1m0.941s       |
-| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz                  | g++-4.9.2           | 0m55.673s      |
 | Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz               | clang++-3.7.x       | 0m12.650s      |
 | Intel Core2 Quad Q6600 (Kentsfield) @ 3.2GHz               | g++-4.9.2           | 0m16.430s      |
 | Intel Core2 Duo P8600 (Penryn) @ 2.4GHz (alt^2)            | apple clang++-8.1.0 | 0m13.383s      |
@@ -41,30 +39,32 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel E3-1270v2 (Ivy Bridge) @ 3.9GHz                      | g++-4.8.2           | 0m7.033s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                          | clang++-3.6.x       | 0m7.276s       |
 | Intel i7-5820K (Haswell) @ 3.6GHz                          | g++-4.8.x           | 0m6.905s       |
+| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz                  | clang++-3.6.2       | 1m0.941s       |
+| Freescale iMX53 (Cortex-A8 r2p5) @ 1.0GHz                  | g++-4.9.2           | 0m55.673s      |
 | Samsung Exynos 5422 (Cortex-A15 r2p3) @ 2.0GHz             | clang++-3.6.2       | 0m28.754s      |
-| Samsung Exynos 5422 (Cortex-A15 r2p3) @ 1.3GHz             | g++-6.3.0           | 0m31.921s [^5] |
+| Samsung Exynos 5422 (Cortex-A15 r2p3) @ 1.3GHz             | g++-6.3.0           | 0m31.921s [^3] |
 | Allwinner A64 (Cortex-A53 r0p4) @ 1.152GHz (alt)           | clang++-3.6.2       | 0m40.832s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | clang++-3.5.0       | 0m19.623s      |
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2)    | g++-4.9.3           | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2)    | clang++-3.6.0       | 0m30.224s      |
-| MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m34.220s [^3] |
-| MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m31.196s [^3] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^4] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^4] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^4] |
-| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^4] |
-| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.019s [^4] |
+| MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m34.220s [^4] |
+| MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m31.196s [^4] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^5] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.019s [^5] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^5] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^5] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^5] |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
-[^3]: This MT8163A is an interesting specimen -- it resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
+[^3]: Non-native compiler tuning -mcpu=cortex-a7  
+[^4]: This MT8163A resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
 
     (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
     (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
-[^4]: Non-native compiler tuning -mcpu=cortex-a57
-[^5]: Non-native compiler tuning -mcpu=cortex-a7
+[^5]: Non-native compiler tuning -mcpu=cortex-a57
 
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
@@ -88,7 +88,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1           | 47.06       |
 | Allwinner A64 (Cortex-A53 r0p4) (alt)               | clang++-3.6.2       | 47.04       |
 | MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)          | clang++-3.6.2       | 46.79       |
-| AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.21       |
+| AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.11       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
 | Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 41.50       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
