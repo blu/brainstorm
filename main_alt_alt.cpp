@@ -98,7 +98,7 @@ static int __attribute__ ((noinline)) parse_cli(
 			"\t" << arg_prefix << arg_memory_size << " <positive_integer>\t\t: amount of memory available to program, in words; default is " << default_memory_size_kw << "Kwords\n"
 
 #if ENABLE_DIAGNOSTICS
-			"\t" << arg_prefix << arg_terminal_count << " <positive_integer>\t: number of steps after which program is forcefully terminated; default is " << default_terminal_count << "\n"
+			"\t" << arg_prefix << arg_terminal_count << " <positive_integer>\t: number of steps after which program is forcefully terminated; default is " << default_terminal_count << '\n'
 
 #endif
 #if PRINT_ASCII == 0
@@ -241,7 +241,7 @@ static Command* __attribute__ ((noinline)) translate(
 			}
 			else {
 				program[j++] = Command(OPCODE_ADD_PTR, 0);
-				stream::cerr << "program error: way too many '>' at ip " << i << "\n";
+				stream::cerr << "program error: way too many '>' at ip " << i << '\n';
 				err = true;
 			}
 			i = imm - 1;
@@ -259,7 +259,7 @@ static Command* __attribute__ ((noinline)) translate(
 			}
 			else {
 				program[j++] = Command(OPCODE_SUB_PTR, 0);
-				stream::cerr << "program error: way too many '<' at ip " << i << "\n";
+				stream::cerr << "program error: way too many '<' at ip " << i << '\n';
 				err = true;
 			}
 			i = imm - 1;
@@ -286,7 +286,7 @@ static Command* __attribute__ ((noinline)) translate(
 			const size_t offset = seekBalancedClose(program + i, j - i);
 
 			if (0 == offset) {
-				stream::cerr << "program error: unmached [ at ip " << i << "\n";
+				stream::cerr << "program error: unmached [ at ip " << i << '\n';
 				err = true;
 				break;
 			}
@@ -297,7 +297,7 @@ static Command* __attribute__ ((noinline)) translate(
 				continue;
 			}
 
-			stream::cerr << "program error: way too far jump at ip " << i << "\n";
+			stream::cerr << "program error: way too far jump at ip " << i << '\n';
 			err = true;
 		}
 
@@ -449,7 +449,7 @@ int main(
 			if (print_ascii)
 				stream::cout << char(mem()[dp]);
 			else
-				stream::cout << mem()[dp] << " ";
+				stream::cout << mem()[dp] << ' ';
 
 #endif
 			break;
@@ -461,11 +461,11 @@ int main(
 
 #if ENABLE_DIAGNOSTICS
 	if (dp >= dataLength) {
-		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip - 1 << "\n";
+		stream::cerr << "program error: out-of-bounds data pointer at ip " << ip - 1 << '\n';
 		return -1;
 	}
 
-	stream::cout << "\ninstructions executed: " << count << "\n";
+	stream::cout << "\ninstructions executed: " << count << '\n';
 
 #endif
 	return 0;
