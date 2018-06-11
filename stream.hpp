@@ -76,54 +76,66 @@ public:
 	}
 
 	const in& operator >>(int16_t& a) const {
-		if (0 != file)
-			fscanf(file, "%hd", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%hd", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
 
 	const in& operator >>(uint16_t& a) const {
-		if (0 != file)
-			fscanf(file, "%hu", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%hu", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
 
 	const in& operator >>(int32_t& a) const {
-		if (0 != file)
-			fscanf(file, "%d", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%d", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
 
 	const in& operator >>(uint32_t& a) const {
-		if (0 != file)
-			fscanf(file, "%u", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%u", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
 
 	const in& operator >>(int64_t& a) const {
-		if (0 != file)
+		if (0 != file) {
 #if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
-			fscanf(file, "%lld", &a);
+			const int nread = fscanf(file, "%lld", &a);
 
 #else
-			fscanf(file, "%ld", &a);
+			const int nread = fscanf(file, "%ld", &a);
 
 #endif
+			assert(1 == nread); (void) nread;
+		}
 		return *this;
 	}
 
 	const in& operator >>(uint64_t& a) const {
-		if (0 != file)
+		if (0 != file) {
 #if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
-			fscanf(file, "%llu", &a);
+			const int nread = fscanf(file, "%llu", &a);
 
 #else
-			fscanf(file, "%lu", &a);
+			const int nread = fscanf(file, "%lu", &a);
 
 #endif
+			assert(1 == nread); (void) nread;
+		}
 		return *this;
 	}
 
