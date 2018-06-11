@@ -105,7 +105,7 @@ public:
 
 	const in& operator >>(int64_t& a) const {
 		if (0 != file)
-#if _MSC_VER || __APPLE__ || __ILP32__
+#if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
 			fscanf(file, "%lld", &a);
 
 #else
@@ -117,7 +117,7 @@ public:
 
 	const in& operator >>(uint64_t& a) const {
 		if (0 != file)
-#if _MSC_VER || __APPLE__ || __ILP32__
+#if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
 			fscanf(file, "%llu", &a);
 
 #else
@@ -141,22 +141,28 @@ public:
 #endif
 #endif
 	const in& operator >>(float& a) const {
-		if (0 != file)
-			fscanf(file, "%f", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%f", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
 
 	const in& operator >>(double& a) const {
-		if (0 != file)
-			fscanf(file, "%lf", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%lf", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
 
 	const in& operator >>(void*& a) const {
-		if (0 != file)
-			fscanf(file, "%p", &a);
+		if (0 != file) {
+			const int nread = fscanf(file, "%p", &a);
+			assert(1 == nread); (void) nread;
+		}
 
 		return *this;
 	}
@@ -448,7 +454,7 @@ public:
 		char format[64];
 		size_t fmtlen = 0;
 
-#if _MSC_VER || __APPLE__ || __ILP32__
+#if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
 		const char base_dec[] = "lld";
 		const char base_hex[] = "llx";
 		const char base_oct[] = "llo";
@@ -478,7 +484,7 @@ public:
 		char format[64];
 		size_t fmtlen = 0;
 
-#if _MSC_VER || __APPLE__ || __ILP32__
+#if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
 		const char base_dec[] = "llu";
 		const char base_hex[] = "llx";
 		const char base_oct[] = "llo";
