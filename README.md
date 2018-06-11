@@ -48,7 +48,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2)    | g++-4.9.3           | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2)    | clang++-3.6.0       | 0m30.224s      |
-| MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m34.220s [^4] |
+| MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m33.430s [^4] |
 | MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m31.196s [^4] |
 | MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^5] |
 | MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.019s [^5] |
