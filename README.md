@@ -55,6 +55,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^5] |
+| Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.213s      |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
@@ -90,6 +91,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)          | clang++-3.6.2       | 46.79       |
 | AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.11       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
+| Baikal-T1 (MIPS P5600) (alt)                        | g++-6.3.0           | 44.66       |
 | Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 41.50       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
