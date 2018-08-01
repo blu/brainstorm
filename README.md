@@ -56,6 +56,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^5] |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.212s      |
+| Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.852s      |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
@@ -91,10 +92,10 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)          | clang++-3.6.2       | 46.79       |
 | AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.11       |
 | Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
-| Baikal-T1 (MIPS P5600) (alt)                        | g++-6.3.0           | 44.65       |
 | Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 41.50       |
 | Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
+| Baikal-T1 (MIPS P5600) (alt^2)                      | g++-7.3.0           | 38.22       |
 | Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)       | g++-7.2.1           | 29.51       |
