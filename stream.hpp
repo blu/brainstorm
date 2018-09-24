@@ -346,6 +346,13 @@ public:
 		close();
 	}
 
+	out& write(const char* const src, const size_t len) {
+		if (0 != file && 0 != src && 0 != len)
+			fwrite(src, sizeof(*src), len, file);
+
+		return *this;
+	}
+
 	void flush() const {
 		if (0 != file)
 			fflush(file);
@@ -579,14 +586,14 @@ public:
 
 	out& operator <<(const char* const a) {
 		if (0 != file)
-			fprintf(file, "%s", a);
+			fputs(a, file);
 
 		return *this;
 	}
 
 	out& operator <<(const std::string& a) {
 		if (0 != file)
-			fprintf(file, "%s", a.c_str());
+			fputs(a.c_str(), file);
 
 		return *this;
 	}
