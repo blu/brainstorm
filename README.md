@@ -55,8 +55,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^5] |
-| Amazon Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz (alt^2)    | g++-7.3.0           | 0m12.881s      |
-| Amazon Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz            | clang++-6.0.0       | 0m16.924s [^5] |
+| AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz (alt^2)       | g++-7.3.0           | 0m12.881s      |
+| AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz               | clang++-6.0.0       | 0m16.924s [^5] |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.212s      |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.822s      |
 
@@ -102,7 +102,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)       | g++-7.2.1           | 29.51       |
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.42       |
-| Amazon Graviton (Cortex-A72 r0p3) (alt^2)           | g++-7.3.0           | 29.37       |
+| AWS Graviton (Cortex-A72 r0p3) (alt^2)              | g++-7.3.0           | 29.37       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
 | AMD Ryzen 1700 (Zen)                                | g++-6.3.0           | 28.62       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
