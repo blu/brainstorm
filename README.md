@@ -48,7 +48,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2)    | g++-4.9.3           | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2)    | clang++-3.6.0       | 0m30.224s      |
-| Rockchip RK3399 (Cortex-A72 r0p2) A64 @ 1.8GHz (alt^2)     | g++-7.4.0           | 0m16.401s [^5] |
+| Rockchip RK3399 (Cortex-A72 r0p2) A64 @ 1.8GHz (alt^2)     | g++-7.4.0           | 0m16.394s [^5] |
 | MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m33.430s [^4] |
 | MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m30.587s [^4] |
 | MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^5] |
@@ -102,7 +102,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Baikal-T1 (MIPS P5600) (alt^2)                      | g++-7.3.0           | 38.19       |
 | Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
-| Rockchip RK3399 (Cortex-A72 r0p2) (alt^2)           | g++-7.4.0           | 29.52       |
+| Rockchip RK3399 (Cortex-A72 r0p2) (alt^2)           | g++-7.4.0           | 29.51       |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)       | g++-7.2.1           | 29.51       |
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.42       |
 | AWS Graviton (Cortex-A72 r0p3) (alt^2)              | g++-7.3.0           | 29.37       |
