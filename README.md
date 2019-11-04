@@ -61,6 +61,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.212s      |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.822s      |
 | Amlogic S922X (Cortex-A73 r0p2) A64 @ 1.8GHz (alt^2)       | g++-7.3.0           | 0m15.459s      |
+| Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.45GHz (alt^2)     | clang++-9.0.0       | 0m12.117s      |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
@@ -102,6 +103,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Baikal-T1 (MIPS P5600) (alt^2)                      | g++-7.3.0           | 38.19       |
 | Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
+| Snapdragon 835 (Cortex-A73 r?p?) (alt^2)            | clang++-9.0.0       | 29.68       |
 | Rockchip RK3399 (Cortex-A72 r0p2) (alt^2)           | g++-7.4.0           | 29.51       |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)       | g++-7.2.1           | 29.51       |
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.42       |
