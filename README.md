@@ -53,6 +53,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m30.587s [^4] |
 | MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^5] |
 | MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.011s [^5] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-8.3.0           | 0m13.433s      |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^5] |
 | Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^5] |
@@ -67,6 +68,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Amlogic S922X (Cortex-A73 r0p2) A64 @ 1.8GHz (alt^2)       | g++-7.3.0           | 0m15.459s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-7.5.0           | 0m11.208s      |
+| Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-8.3.0           | 0m10.915s      |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
@@ -76,7 +78,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
     (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
     (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
-[^5]: Non-native compiler tuning -mcpu=cortex-a57
+[^5]: Non-native compiler tuning -mcpu=cortex-a57  
 [^6]: Non-native compiler tuning -mcpu=cortex-a75
 
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
@@ -115,8 +117,8 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.42       |
 | AWS Graviton (Cortex-A72 r0p3) (alt^2)              | g++-7.3.0           | 29.37       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
-| AMD Ryzen 1700 (Zen)                                | g++-6.3.0           | 28.62       |
-| Snapdragon 835 (Cortex-A73 r?p?) (alt^2)            | g++-7.5.0           | 28.58       |
+| MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-8.3.0           | 28.21       |
+| Snapdragon 835 (Cortex-A73 r?p?) (alt^2)            | g++-8.3.0           | 27.83       |
 | Amlogic S922X (Cortex-A73 r0p2) (alt^2)             | g++-7.3.0           | 27.83       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
 | AMD Ryzen 1700X (Zen)                               | g++-4.9.2           | 25.98       |
