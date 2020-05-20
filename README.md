@@ -61,7 +61,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | NXP LX2160A (Cortex-A72 r0p3) A64 @ 2.0GHz (alt^2)         | clang++-8.0.0       | 0m19.590s [^5] |
 | AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz (alt^2)       | g++-7.3.0           | 0m12.881s      |
 | AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz               | clang++-6.0.0       | 0m16.924s      |
-| AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | g++-7.5.0           | 0m8.329s       |
+| AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | g++-7.5.0           | 0m8.329s  [^6] |
 | AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | clang++-8.0.0       | 0m8.836s  [^6] |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.212s      |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.822s      |
@@ -69,6 +69,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-7.5.0           | 0m11.208s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-8.3.0           | 0m10.915s      |
+| Intel i5-1035G4 (Ice Lake) @ 3.5 GHz (alt^2)               | clang++-9.0.0       | 0m4.930s       |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
 [^2]: Non-native compiler tuning -march=corei7  
@@ -124,6 +125,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | AMD Ryzen 1700X (Zen)                               | g++-4.9.2           | 25.98       |
 | Intel i7-5820K (Haswell)                            | g++-4.8.x           | 24.86       |
 | AWS Graviton2 (Cortex-A76 r3p0) (alt^2)             | g++-7.5.0           | 20.82       |
+| Intel i5-1035G4 (Ice Lake) (alt^2)                  | clang++-9.0.0       | 17.26       |
 
 Musings
 -------
