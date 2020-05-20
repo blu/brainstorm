@@ -61,8 +61,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | NXP LX2160A (Cortex-A72 r0p3) A64 @ 2.0GHz (alt^2)         | clang++-8.0.0       | 0m19.590s [^5] |
 | AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz (alt^2)       | g++-7.3.0           | 0m12.881s      |
 | AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz               | clang++-6.0.0       | 0m16.924s      |
-| AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | g++-7.5.0           | 0m8.329s  [^6] |
-| AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | clang++-8.0.0       | 0m8.836s  [^6] |
+| AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | g++-7.5.0           | 0m8.115s       |
+| AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | clang++-9.0.1       | 0m7.740s       |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.212s      |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.822s      |
 | Amlogic S922X (Cortex-A73 r0p2) A64 @ 1.8GHz (alt^2)       | g++-7.3.0           | 0m15.459s      |
@@ -79,8 +79,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
     (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
     (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
-[^5]: Non-native compiler tuning -mcpu=cortex-a57  
-[^6]: Non-native compiler tuning -mcpu=cortex-a75
+[^5]: Non-native compiler tuning -mcpu=cortex-a57
 
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
@@ -124,7 +123,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
 | AMD Ryzen 1700X (Zen)                               | g++-4.9.2           | 25.98       |
 | Intel i7-5820K (Haswell)                            | g++-4.8.x           | 24.86       |
-| AWS Graviton2 (Cortex-A76 r3p0) (alt^2)             | g++-7.5.0           | 20.82       |
+| AWS Graviton2 (Cortex-A76 r3p0) (alt^2)             | clang++-9.0.1       | 19.35       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                  | clang++-9.0.0       | 17.26       |
 
 Musings
