@@ -69,6 +69,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-7.5.0           | 0m11.208s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-8.3.0           | 0m10.915s      |
+| Snapdragon SQ1 (Cortex-A76 r?p?) A64 @ 3.0GHz (alt^2)      | clang++-9.0.1       | 0m7.043s       |
 | Intel i5-1035G4 (Ice Lake) @ 3.5 GHz (alt^2)               | clang++-9.0.0       | 0m4.930s       |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage  
@@ -123,6 +124,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
 | AMD Ryzen 1700X (Zen)                               | g++-4.9.2           | 25.98       |
 | Intel i7-5820K (Haswell)                            | g++-4.8.x           | 24.86       |
+| Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)            | clang++-9.0.1       | 21.13       |
 | AWS Graviton2 (Cortex-A76 r3p0) (alt^2)             | clang++-9.0.1       | 19.35       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                  | clang++-9.0.0       | 17.26       |
 
