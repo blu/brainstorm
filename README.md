@@ -66,6 +66,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt)                      | g++-6.3.0           | 0m37.212s      |
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.822s      |
 | Amlogic S922X (Cortex-A73 r0p2) A64 @ 1.8GHz (alt^2)       | g++-7.3.0           | 0m15.459s      |
+| NVIDIA armv8.2 (Carmel) A64 @ 1.907GHz (alt^2)             | g++-8.4.0           | 0m14.680s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-7.5.0           | 0m11.208s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-8.3.0           | 0m10.915s      |
@@ -119,6 +120,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | AWS Graviton (Cortex-A72 r0p3) (alt^2)              | g++-7.3.0           | 29.37       |
 | Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
 | MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-8.3.0           | 28.21       |
+| NVIDIA armv8.2 (Carmel) A64 @ 1.907GHz (alt^2)      | g++-8.4.0           | 27.99       |
 | Snapdragon 835 (Cortex-A73 r?p?) (alt^2)            | g++-8.3.0           | 27.83       |
 | Amlogic S922X (Cortex-A73 r0p2) (alt^2)             | g++-7.3.0           | 27.83       |
 | Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
