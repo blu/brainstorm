@@ -67,6 +67,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Baikal-T1 (MIPS P5600) @ 1.2GHz (alt^2)                    | g++-7.3.0           | 0m31.822s      |
 | Amlogic S922X (Cortex-A73 r0p2) A64 @ 1.8GHz (alt^2)       | g++-7.3.0           | 0m15.459s      |
 | NVIDIA armv8.2 (Carmel) A64 @ 1.907GHz (alt^2)             | g++-8.4.0           | 0m14.680s      |
+| Fujitsu armv8.2 (A64fx) A64 @ 2.2GHz (alt^2)               | clang++-7.0.0       | 0m14.652s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-7.5.0           | 0m11.208s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-8.3.0           | 0m10.915s      |
@@ -112,6 +113,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
 | Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 40.01       |
 | Baikal-T1 (MIPS P5600) (alt^2)                      | g++-7.3.0           | 38.19       |
+| Fujitsu armv8.2 (A64fx) (alt^2)                     | clang++-7.0.0       | 32.23       |
 | Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
 | Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
 | Rockchip RK3399 (Cortex-A72 r0p2) (alt^2)           | g++-7.4.0           | 29.51       |
