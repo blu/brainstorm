@@ -24,7 +24,7 @@ public:
 	}
 
 	void close() {
-		if (0 == file)
+		if (nullptr == file)
 			return;
 
 		fclose(file);
@@ -35,7 +35,7 @@ public:
 		close();
 
 		file = fopen(filename, "r");
-		return 0 != file;
+		return nullptr != file;
 	}
 
 	bool open(FILE* const f) {
@@ -45,7 +45,7 @@ public:
 		if (-1 != fd)
 			file = fdopen(dup(fd), "r");
 
-		return 0 != file;
+		return nullptr != file;
 	}
 
 	~in() {
@@ -53,30 +53,30 @@ public:
 	}
 
 	bool is_eof() const {
-		if (0 != file)
+		if (nullptr != file)
 			return static_cast< bool >(feof(file));
 
 		return false;
 	}
 
 	bool is_good() const {
-		return (0 != file) && (0 == ferror(file));
+		return (nullptr != file) && (0 == ferror(file));
 	}
 
 	void set_good() const {
-		if (0 != file)
+		if (nullptr != file)
 			clearerr(file);
 	}
 
 	const in& operator >>(char& a) const {
-		if (0 != file)
+		if (nullptr != file)
 			a = getc(file);
 
 		return *this;
 	}
 
 	const in& operator >>(int16_t& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%hd", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -85,7 +85,7 @@ public:
 	}
 
 	const in& operator >>(uint16_t& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%hu", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -94,7 +94,7 @@ public:
 	}
 
 	const in& operator >>(int32_t& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%d", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -103,7 +103,7 @@ public:
 	}
 
 	const in& operator >>(uint32_t& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%u", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -112,7 +112,7 @@ public:
 	}
 
 	const in& operator >>(int64_t& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 #if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
 			const int nread = fscanf(file, "%lld", &a);
 
@@ -126,7 +126,7 @@ public:
 	}
 
 	const in& operator >>(uint64_t& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 #if _MSC_VER || __APPLE__ || __SIZEOF_LONG__ == 4
 			const int nread = fscanf(file, "%llu", &a);
 
@@ -153,7 +153,7 @@ public:
 #endif
 #endif
 	const in& operator >>(float& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%f", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -162,7 +162,7 @@ public:
 	}
 
 	const in& operator >>(double& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%lf", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -171,7 +171,7 @@ public:
 	}
 
 	const in& operator >>(void*& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const int nread = fscanf(file, "%p", &a);
 			assert(1 == nread); (void) nread;
 		}
@@ -180,7 +180,7 @@ public:
 	}
 
 	const in& operator >>(std::string& a) const {
-		if (0 != file) {
+		if (nullptr != file) {
 			const size_t buffer_inc = 1024;
 			size_t buffer_size = 0;
 			size_t len = 0;
@@ -317,7 +317,7 @@ public:
 	}
 
 	void close() {
-		if (0 == file)
+		if (nullptr == file)
 			return;
 
 		fclose(file);
@@ -329,7 +329,7 @@ public:
 
 		const char* const mode = append ? "a" : "w";
 		file = fopen(filename, mode);
-		return 0 != file;
+		return nullptr != file;
 	}
 
 	bool open(FILE* const f) {
@@ -339,7 +339,7 @@ public:
 		if (-1 != fd)
 			file = fdopen(dup(fd), "a");
 
-		return 0 != file;
+		return nullptr != file;
 	}
 
 	~out() {
@@ -347,35 +347,35 @@ public:
 	}
 
 	out& write(const char* const src, const size_t len) {
-		if (0 != file && 0 != src && 0 != len)
+		if (nullptr != file && nullptr != src && 0 != len)
 			fwrite(src, sizeof(*src), len, file);
 
 		return *this;
 	}
 
 	void flush() const {
-		if (0 != file)
+		if (nullptr != file)
 			fflush(file);
 	}
 
 	bool is_good() const {
-		return (0 != file) && (0 == ferror(file));
+		return (nullptr != file) && (0 == ferror(file));
 	}
 
 	void set_good() const {
-		if (0 != file)
+		if (nullptr != file)
 			clearerr(file);
 	}
 
 	out& operator <<(const char a) {
-		if (0 != file)
+		if (nullptr != file)
 			putc(a, file);
 
 		return *this;
 	}
 
 	out& operator <<(const int16_t a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -398,7 +398,7 @@ public:
 	}
 
 	out& operator <<(const uint16_t a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -421,7 +421,7 @@ public:
 	}
 
 	out& operator <<(const int32_t a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -444,7 +444,7 @@ public:
 	}
 
 	out& operator <<(const uint32_t a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -467,7 +467,7 @@ public:
 	}
 
 	out& operator <<(const int64_t a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -497,7 +497,7 @@ public:
 	}
 
 	out& operator <<(const uint64_t a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -540,7 +540,7 @@ public:
 #endif
 #endif
 	out& operator <<(const float a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -559,7 +559,7 @@ public:
 	}
 
 	out& operator <<(const double a) {
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		char format[64];
@@ -578,21 +578,21 @@ public:
 	}
 
 	out& operator <<(const void* const a) {
-		if (0 != file)
+		if (nullptr != file)
 			fprintf(file, "%p", a);
 
 		return *this;
 	}
 
 	out& operator <<(const char* const a) {
-		if (0 != file)
+		if (nullptr != a && nullptr != file)
 			fputs(a, file);
 
 		return *this;
 	}
 
 	out& operator <<(const std::string& a) {
-		if (0 != file)
+		if (nullptr != file)
 			fputs(a.c_str(), file);
 
 		return *this;
@@ -630,7 +630,7 @@ public:
 
 	out& operator <<(const TerminatorFuncId id) {
 
-		if (0 == file)
+		if (nullptr == file)
 			return *this;
 
 		if (stream::endl == id) {
