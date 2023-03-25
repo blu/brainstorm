@@ -48,17 +48,17 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AppliedMicro X-Gene 1 @ 2.4GHz (alt)                       | g++-4.9.1           | 0m19.608s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A32 @ 1.51GHz (alt^2)    | g++-4.9.3           | 0m32.623s      |
 | Rockchip RK3368 (Cortex-A53 r0p3) A64 @ 1.51GHz (alt^2)    | clang++-3.6.0       | 0m30.224s      |
-| Rockchip RK3399 (Cortex-A72 r0p2) A64 @ 1.8GHz (alt^2)     | g++-7.4.0           | 0m16.394s [^5] |
+| Rockchip RK3399 (Cortex-A72 r0p2) A64 @ 1.8GHz (alt^2)     | g++-7.4.0           | 0m16.394s [^3] |
 | MediaTek MT8163A (Cortex-A53 r0p3) A32 @ 1.5GHz (alt^2)    | g++-4.9.2           | 0m33.430s [^4] |
 | MediaTek MT8163A (Cortex-A53 r0p3) A64 @ 1.5GHz (alt^2)    | clang++-3.6.2       | 0m30.587s [^4] |
-| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^5] |
-| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.011s [^5] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz            | clang++-5.0.1       | 0m19.083s [^3] |
+| MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-7.2.1           | 0m14.011s [^3] |
 | MediaTek MT8173C (Cortex-A72 r0p0) A64 @ 2.1GHz (alt^2)    | g++-8.3.0           | 0m13.433s      |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^5] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^5] |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^5] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz (alt^2) | g++-7.2.1           | 0m22.703s [^3] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 1.3GHz         | clang++-3.5.2       | 0m30.836s [^3] |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) A64 @ 2.0GHz         | clang++-3.5.2       | 0m20.035s [^3] |
 | NXP LX2160A (Cortex-A72 r0p3) A64 @ 2.0GHz (alt^2)         | g++-7.4.0           | 0m14.748s      |
-| NXP LX2160A (Cortex-A72 r0p3) A64 @ 2.0GHz (alt^2)         | clang++-8.0.0       | 0m19.590s [^5] |
+| NXP LX2160A (Cortex-A72 r0p3) A64 @ 2.0GHz (alt^2)         | clang++-8.0.0       | 0m19.590s [^3] |
 | AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz (alt^2)       | g++-7.3.0           | 0m12.881s      |
 | AWS Graviton (Cortex-A72 r0p3) A64 @ 2.28GHz               | clang++-6.0.0       | 0m16.924s      |
 | AWS Graviton2 (Cortex-A76 r3p0) A64 @ 2.5GHz (alt^2)       | g++-7.5.0           | 0m8.115s       |
@@ -83,13 +83,11 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage
 [^2]: Non-native compiler tuning -march=corei7
-[^3]: Non-native compiler tuning -mcpu=cortex-a7
+[^3]: Non-native compiler tuning -mcpu=cortex-a57
 [^4]: This MT8163A resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
 
     (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.  
     (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
-
-[^5]: Non-native compiler tuning -mcpu=cortex-a57
 
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
