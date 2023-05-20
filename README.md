@@ -80,6 +80,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel i5-1035G4 (Ice Lake) @ 3.5 GHz (alt^2)               | clang++-9.0.0       | 0m4.930s       |
 | AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                         | g++-11.2.1          | 0m03.90        |
 | AMD Ryzen 9 7950x (Zen4) @ full boost (~5.7 GHz)           | g++-11.2.1          | 0m03.11        |
+| Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 early 2015)       | apple clang++ 11.0.3| 0m06.70        |
+| Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 e 2015) (alt^2)   | apple clang++ 11.0.3| 0m06.00        |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage
 [^2]: Non-native compiler tuning -march=corei7
@@ -105,41 +107,43 @@ Note: There are two compiler snafus in all A64 alt-alt entries built by clang. F
 
 Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is better):
 
-| CPU                                                 | compiler            | ticks       |
-|---------------------------------------------------- | ------------------- | ----------- |
-| Freescale iMX53 (Cortex-A8 r2p5)                    | g++-4.9.2           | 55.67       |
-| AppliedMicro X-Gene 1 (alt)                         | g++-4.9.1           | 47.06       |
-| Allwinner A64 (Cortex-A53 r0p4) (alt)               | clang++-3.6.2       | 47.04       |
-| AMD C-60 (Bobcat)                                   | g++-4.8.4           | 46.11       |
-| MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)          | clang++-3.6.2       | 45.88       |
-| Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)           | clang++-3.6.0       | 45.64       |
-| Intel Core2 Quad Q6600 (Kentsfield)                 | clang++-3.7.x       | 40.48       |
-| AMD A8-7600 (Steamroller)                           | clang++-3.5.2       | 40.13       |
-| Samsung Exynos 5422 (Cortex-A15 r2p3)               | g++-6.3.0           | 40.01       |
-| Baikal-T1 (MIPS P5600) (alt^2)                      | g++-7.3.0           | 38.19       |
-| Fujitsu armv8.2 (A64fx) (alt^2)                     | clang++-7.0.0       | 32.23       |
-| Intel Core2 Duo P8600 (Penryn) (alt^2)              | apple clang++-8.1.0 | 32.12       |
-| Intel i7-2600 (Sandy Bridge)                        | g++-5.3.0           | 31.73       |
-| Rockchip RK3399 (Cortex-A72 r0p2) (alt^2)           | g++-7.4.0           | 29.51       |
-| Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)       | g++-7.2.1           | 29.51       |
-| NXP LX2160A (Cortex-A72 r0p3) (alt^2)               | g++-7.4.0           | 29.50       |
-| MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-7.2.1           | 29.42       |
-| AWS Graviton (Cortex-A72 r0p3) (alt^2)              | g++-7.3.0           | 29.37       |
-| Intel E5-2687W (Sandy Bridge)                       | clang++-3.6.2       | 29.11       |
-| MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)          | g++-8.3.0           | 28.21       |
-| Snapdragon 835 (Cortex-A73 r?p?) (alt^2)            | g++-8.3.0           | 27.83       |
-| Amlogic S922X (Cortex-A73 r0p2) (alt^2)             | g++-7.3.0           | 27.83       |
-| Intel E3-1270v2 (Ivy Bridge)                        | g++-4.8.2           | 27.34       |
-| AMD Ryzen 1700X (Zen)                               | g++-4.9.2           | 25.98       |
-| NVIDIA armv8.2 (Carmel) A64 @ 2.265GHz (alt^2)      | g++-8.4.0           | 24.89       |
-| Intel i7-5820K (Haswell)                            | g++-4.8.x           | 24.86       |
-| Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)            | clang++-9.0.1       | 21.13       |
-| Apple M2 Pro (Avalanche) A64 @ 3.49GHz (alt^2)      | clang++-14.0.0      | 20.52       |
-| Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)            | clang++-10.0.0      | 20.07       |
-| AWS Graviton2 (Cortex-A76 r3p0) (alt^2)             | clang++-9.0.1       | 19.35       |
-| AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                  | g++-11.2.1          | 17.55       |
-| Intel i5-1035G4 (Ice Lake) (alt^2)                  | clang++-9.0.0       | 17.26       |
-| Apple armv8.4 (Firestorm) (alt^2)                   | g++-11.0.0          | 13.92       |
+| CPU                                                   | compiler            | ticks       |
+|------------------------------------------------------ | ------------------- | ----------- |
+| Freescale iMX53 (Cortex-A8 r2p5)                      | g++-4.9.2           | 55.67       |
+| AppliedMicro X-Gene 1 (alt)                           | g++-4.9.1           | 47.06       |
+| Allwinner A64 (Cortex-A53 r0p4) (alt)                 | clang++-3.6.2       | 47.04       |
+| AMD C-60 (Bobcat)                                     | g++-4.8.4           | 46.11       |
+| MediaTek MT8163A (Cortex-A53 r0p3) (alt^2)            | clang++-3.6.2       | 45.88       |
+| Rockchip RK3368 (Cortex-A53 r0p3) (alt^2)             | clang++-3.6.0       | 45.64       |
+| Intel Core2 Quad Q6600 (Kentsfield)                   | clang++-3.7.x       | 40.48       |
+| AMD A8-7600 (Steamroller)                             | clang++-3.5.2       | 40.13       |
+| Samsung Exynos 5422 (Cortex-A15 r2p3)                 | g++-6.3.0           | 40.01       |
+| Baikal-T1 (MIPS P5600) (alt^2)                        | g++-7.3.0           | 38.19       |
+| Fujitsu armv8.2 (A64fx) (alt^2)                       | clang++-7.0.0       | 32.23       |
+| Intel Core2 Duo P8600 (Penryn) (alt^2)                | apple clang++-8.1.0 | 32.12       |
+| Intel i7-2600 (Sandy Bridge)                          | g++-5.3.0           | 31.73       |
+| Rockchip RK3399 (Cortex-A72 r0p2) (alt^2)             | g++-7.4.0           | 29.51       |
+| Marvell ARMADA 8040 (Cortex-A72 r0p1) (alt^2)         | g++-7.2.1           | 29.51       |
+| NXP LX2160A (Cortex-A72 r0p3) (alt^2)                 | g++-7.4.0           | 29.50       |
+| MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)            | g++-7.2.1           | 29.42       |
+| AWS Graviton (Cortex-A72 r0p3) (alt^2)                | g++-7.3.0           | 29.37       |
+| Intel E5-2687W (Sandy Bridge)                         | clang++-3.6.2       | 29.11       |
+| MediaTek MT8173C (Cortex-A72 r0p0) (alt^2)            | g++-8.3.0           | 28.21       |
+| Snapdragon 835 (Cortex-A73 r?p?) (alt^2)              | g++-8.3.0           | 27.83       |
+| Amlogic S922X (Cortex-A73 r0p2) (alt^2)               | g++-7.3.0           | 27.83       |
+| Intel E3-1270v2 (Ivy Bridge)                          | g++-4.8.2           | 27.34       |
+| AMD Ryzen 1700X (Zen)                                 | g++-4.9.2           | 25.98       |
+| NVIDIA armv8.2 (Carmel) A64 @ 2.265GHz (alt^2)        | g++-8.4.0           | 24.89       |
+| Intel i7-5820K (Haswell)                              | g++-4.8.x           | 24.86       |
+| Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)              | clang++-9.0.1       | 21.13       |
+| Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 early 2015)  | apple clang++ 11.0.3| 20.77       |
+| Apple M2 Pro (Avalanche) A64 @ 3.49GHz (alt^2)        | clang++-14.0.0      | 20.52       |
+| Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)              | clang++-10.0.0      | 20.07       |
+| AWS Graviton2 (Cortex-A76 r3p0) (alt^2)               | clang++-9.0.1       | 19.35       |
+| Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 2015) (alt^2)| apple clang++ 11.0.3| 18.60       |
+| AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                    | g++-11.2.1          | 17.55       |
+| Intel i5-1035G4 (Ice Lake) (alt^2)                    | clang++-9.0.0       | 17.26       |
+| Apple armv8.4 (Firestorm) (alt^2)                     | g++-11.0.0          | 13.92       |
 
 Musings
 -------
