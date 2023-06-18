@@ -5,7 +5,7 @@
 #include <cstring>
 #include "stream.hpp"
 #include "scoped.hpp"
-#include "get_file_size.hpp"
+#include "util_file.hpp"
 
 // verify iostream-free status
 #if _GLIBCXX_IOSTREAM
