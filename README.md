@@ -144,10 +144,3 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Apple armv8.5 (Avalanche) (alt^2)                     | g++-12.2.0          | 14.46       |
 | Apple armv8.4 (Firestorm) (alt^2)                     | g++-11.0.0          | 13.92       |
 
-Musings
--------
-
-Since brainstorm is a classic example of 100%-integer, branchy code, it can be indicative of some fundamental microarchitecture characteristics. For instance, in the mandelbrot test above:
-
-* Bobcat (a dual-decode/dual-issue/six-dispatch, out-of-order microarchitecture) is ~1.2x faster per-clock than Cortex-A8 (a dual-decode/dual-issue, in-order microarchitecture). Unfortunately, we cannot tell what part of Bobcat's advantage comes from the out-of-orderness, and what - from a potentially better branch predictor (currently perf does not support very well Cortex-A8's performance counters).
-* Ivy Bridge (a quad-decode/quad-issue/six-dispatch, aggressively out-of-order microarchitecture) is ~1.7x faster per-clock than Bobcat. IVB does not quite outperform Bobcat twice in this test, even though IVB should have a clear branch-predictor advantage, on top of its twice-wider decoder. Indeed, running the test under perf stat shows that IVB achieves an average IPC of 2.46 and no branch mispredictions to speak of (0.34%), versus IPC of 1.42 for Bobcat and slightly worse but still negligible branch mispredictions (1.36%). So we have an apparent case of diminishing returns from the decode width, even when branch mispredictions are not an issue. Actually this is true not only for this test as 2.35-2.5 is normal IPC for the late 4-decode Intel microarchitectures across many loads.
