@@ -74,9 +74,10 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)     | g++-8.3.0           | 0m10.915s      |
 | Snapdragon SQ1 (Cortex-A76 r?p?) A64 @ 3.0GHz (alt^2)      | clang++-9.0.1       | 0m7.043s       |
 | Snapdragon SQ1 (Cortex-A76 r?p?) A64 @ 3.0GHz (alt^2)      | clang++-10.0.0      | 0m6.690s       |
-| Apple armv8.4 (Firestorm) A64 @ 3.2GHz (alt^2)             | apple clang++ 12.0.0| 0m6.510s       |
-| Apple armv8.4 (Firestorm) A64 @ 3.2GHz (alt^2)             | g++-11.0.0          | 0m4.350s       |
-| Apple armv8.5 (Avalanche) A64 @ 3.49GHz (alt^2)            | apple clang++ 14.0.0| 0m5.880s       |
+| Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                 | apple clang++ 12.0.0| 0m6.510s       |
+| Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                 | g++-11.0.0          | 0m4.350s       |
+| Apple armv8.5 (Avalanche) @ 3.49GHz (alt^2)                | apple clang++ 14.0.0| 0m5.880s       |
+| Apple armv8.5 (Avalanche) @ 3.49GHz (alt^2)                | g++-12.2.0          | 0m4.142s       |
 | Intel i5-1035G4 (Ice Lake) @ 3.5 GHz (alt^2)               | clang++-9.0.0       | 0m4.930s       |
 | AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                         | g++-11.2.1          | 0m03.90        |
 | AMD Ryzen 9 7950x (Zen4) @ full boost (~5.7 GHz)           | g++-11.2.1          | 0m03.11        |
@@ -133,16 +134,14 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Amlogic S922X (Cortex-A73 r0p2) (alt^2)               | g++-7.3.0           | 27.83       |
 | Intel E3-1270v2 (Ivy Bridge)                          | g++-4.8.2           | 27.34       |
 | AMD Ryzen 1700X (Zen)                                 | g++-4.9.2           | 25.98       |
-| NVIDIA armv8.2 (Carmel) A64 @ 2.265GHz (alt^2)        | g++-8.4.0           | 24.89       |
+| NVIDIA armv8.2 (Carmel) A64 (alt^2)                   | g++-8.4.0           | 24.89       |
 | Intel i7-5820K (Haswell)                              | g++-4.8.x           | 24.86       |
-| Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)              | clang++-9.0.1       | 21.13       |
-| Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 early 2015)  | apple clang++ 11.0.3| 20.77       |
-| Apple armv8.5 (Avalanche) A64 @ 3.49GHz (alt^2)       | clang++-14.0.0      | 20.52       |
 | Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)              | clang++-10.0.0      | 20.07       |
 | AWS Graviton2 (Cortex-A76 r3p0) (alt^2)               | clang++-9.0.1       | 19.35       |
-| Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 2015) (alt^2)| apple clang++ 11.0.3| 18.60       |
-| AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                    | g++-11.2.1          | 17.55       |
+| Intel i5-5257U (MacBook Pro 13 2015) (alt^2)          | apple clang++ 11.0.3| 18.60       |
+| AMD Ryzen 9 7950x (Zen4)                              | g++-11.2.1          | 17.55       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                    | clang++-9.0.0       | 17.26       |
+| Apple armv8.5 (Avalanche) (alt^2)                     | g++-12.2.0          | 14.46       |
 | Apple armv8.4 (Firestorm) (alt^2)                     | g++-11.0.0          | 13.92       |
 
 Musings
