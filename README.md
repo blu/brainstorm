@@ -83,6 +83,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | AMD Ryzen 9 7950x (Zen4) @ full boost (~5.7 GHz)           | g++-11.2.1          | 0m03.11        |
 | Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 early 2015)       | apple clang++ 11.0.3| 0m06.70        |
 | Intel i5-5257U @ 3.1 GHz (MacBook Pro 13 e 2015) (alt^2)   | apple clang++ 11.0.3| 0m06.00        |
+| Apple armv8.5 (Avalanche) A64 @ 3.49GHz                    | g++-12.2.0          | 0m04.142       |
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage
 [^2]: Non-native compiler tuning -march=corei7
@@ -141,6 +142,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel i5-5257U (MacBook Pro 13 2015) (alt^2)          | apple clang++ 11.0.3| 18.60       |
 | AMD Ryzen 9 7950x (Zen4)                              | g++-11.2.1          | 17.55       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                    | clang++-9.0.0       | 17.26       |
+| Apple armv8.5 (Avalanche) A64 @ 3.49GHz               | g++-12.2.0          | 14.45       |
 | Apple armv8.4 (Firestorm) (alt^2)                     | g++-11.0.0          | 13.92       |
 | Apple armv8.5 (Avalanche)                             | g++-13.1.0          | 13.72       |
 
