@@ -77,7 +77,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                 | apple clang++ 12.0.0| 0m6.510s       |
 | Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                 | g++-11.0.0          | 0m4.350s       |
 | Apple armv8.5 (Avalanche) @ 3.49GHz (alt^2)                | apple clang++ 14.0.0| 0m5.880s       |
-| Apple armv8.5 (Avalanche) @ 3.49GHz (alt^2)                | g++-12.2.0          | 0m4.142s       |
+| Apple armv8.5 (Avalanche) @ 3.49GHz                        | g++-13.1.0          | 0m3.930s       |
 | Intel i5-1035G4 (Ice Lake) @ 3.5 GHz (alt^2)               | clang++-9.0.0       | 0m4.930s       |
 | AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                         | g++-11.2.1          | 0m03.90        |
 | AMD Ryzen 9 7950x (Zen4) @ full boost (~5.7 GHz)           | g++-11.2.1          | 0m03.11        |
@@ -141,6 +141,6 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel i5-5257U (MacBook Pro 13 2015) (alt^2)          | apple clang++ 11.0.3| 18.60       |
 | AMD Ryzen 9 7950x (Zen4)                              | g++-11.2.1          | 17.55       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                    | clang++-9.0.0       | 17.26       |
-| Apple armv8.5 (Avalanche) (alt^2)                     | g++-12.2.0          | 14.46       |
 | Apple armv8.4 (Firestorm) (alt^2)                     | g++-11.0.0          | 13.92       |
+| Apple armv8.5 (Avalanche)                             | g++-13.1.0          | 13.72       |
 
