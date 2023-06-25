@@ -146,6 +146,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | NVIDIA armv8.2 (Carmel) A64 (alt^2)                              | g++-8.4.0           | 24.89       |
 | Intel i7-5820K (Haswell)                                         | g++-4.8.x           | 24.86       |
 | AMD Ryzen 1700 (Zen) @ 3.168GHz                                  | g++-12.3.1          | 22.43       |
+| Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                       | apple clang++ 12.0.0| 20.83       |
 | Intel i5-5257U (Broadwell) @ 3.1 GHz                             | apple clang++ 11.0.3| 20.77       |
 | Apple armv8.5 (Avalanche) (alt^2)                                | apple clang++-14.0.0| 20.52       |
 | Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)                         | clang++-10.0.0      | 20.07       |
