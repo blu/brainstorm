@@ -90,6 +90,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel i7-8700 (Coffee Lake) @ full boost (~4.28-4.60 GHZ) (alt^2)                 | clang-13.0 [^5]     | 0m4.089s       |
 | Intel i7-8700 (Coffee Lake) @ 3.19 GHZ                                            | clang-13.0 [^5]     | 0m6.25s        |
 | Intel i7-8700 (Coffee Lake) @ 3.19 GHZ (alt^2)                                    | clang-13.0 [^5]     | 0m5.62s        |
+| Intel w9-3475X (Sapphire Rapids) @ 4.80GHz (alt^2)                                | clang-13.0 [^5]     | 0m06.77s       |
 
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage
@@ -148,13 +149,14 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | AMD Ryzen 1700 (Zen) @ 3.168GHz                                                   | g++-12.3.1          | 22.43       |
 | Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                                        | apple clang++ 12.0.0| 20.83       |
 | Intel i5-5257U (Broadwell) @ 3.1 GHz                                              | apple clang++ 11.0.3| 20.77       |
-| Apple armv8.5 (Avalanche) (alt^2)                                                 | apple clang++-14.0.0| 20.52       |
+| Apple armv8.5 (Avalanche) @ 3.49 GHz (alt^2)                                      | apple clang++-14.0.0| 20.52       |
 | Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)                                          | clang++-10.0.0      | 20.07       |
 | AWS Graviton2 (Cortex-A76 r3p0) (alt^2)                                           | clang++-9.0.1       | 19.35       |
 | Intel i5-5257U (Broadwell) @ 3.1 GHz (alt^2)                                      | apple clang++ 11.0.3| 18.60       |
 | Intel i7-8700 (Coffee Lake) @ 3.19 GHZ (alt^2)                                    | clang-13.0 [^5]     | 17.93       |
 | AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                                                | g++-11.2.1          | 17.55       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                                                | clang++-9.0.0       | 17.26       |
+| Intel w9-3475X (Sapphire Rapids) @ 2.21GHz (alt^2)                                | clang-13.0 [^5]     | 14.95       |
 | Intel i9-13900k (Raptor Cove) @ full boost (~5.50-5.56 GHZ)                       | clang-13.0 (windows)| 14.88       |
 | Apple armv8.5 (Avalanche)                                                         | g++-12.2.0          | 14.45       |
 | Apple armv8.4 (Firestorm) (alt^2)                                                 | g++-11.0.0          | 13.92       |
