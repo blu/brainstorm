@@ -158,7 +158,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                                                | g++-11.2.1          | 17.55       |
 | Intel i5-1035G4 (Ice Lake) (alt^2)                                                | clang++-9.0.0       | 17.26       |
 | Intel w9-3475X (Sapphire Rapids) @ 2.21GHz (alt^2)                                | clang-13.0 [^5]     | 14.95       |
-| Intel i9-13900k (Raptor Cove) @ full boost (~5.50-5.56 GHZ)                       | clang-13.0 (windows)| 14.88       |
+| Intel i9-13900k (Raptor Cove) @ full boost (~5.50-5.56 GHZ)                       | clang-13.0 [^5]     | 14.88       |
 | Apple armv8.5 (Avalanche)                                                         | g++-12.2.0          | 14.45       |
 | Apple armv8.4 (Firestorm) (alt^2)                                                 | g++-11.0.0          | 13.92       |
 | Apple armv8.5 (Avalanche)                                                         | g++-13.1.0          | 13.72       |
