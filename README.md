@@ -69,6 +69,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Amlogic S922X (Cortex-A73 r0p2) A64 @ 1.8GHz (alt^2)                              | g++-7.3.0           | 0m15.459s      |
 | NVIDIA armv8.2 (Carmel) A64 @ 1.907GHz (alt^2)                                    | g++-8.4.0           | 0m14.680s      |
 | NVIDIA armv8.2 (Carmel) A64 @ 2.265GHz (alt^2)                                    | g++-8.4.0           | 0m10.990s      |
+| NVIDIA Orin (Cortex-A78AE) A64 @ 2.2GHz (alt^2)                                   | g++-8.4.0           | 0m6.51s        |
 | Fujitsu armv8.2 (A64fx) A64 @ 2.2GHz (alt^2)                                      | clang++-7.0.0       | 0m14.652s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)                            | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)                            | g++-7.5.0           | 0m11.208s      |
@@ -162,6 +163,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel w9-3475X (Sapphire Rapids) @ 2.21GHz (alt^2)                                | clang-13.0 [^5]     | 14.95       |
 | Intel i9-13900k (Raptor Cove) @ full boost (~5.50-5.56 GHZ)                       | clang-13.0 [^5]     | 14.88       |
 | Apple armv8.5 (Avalanche)                                                         | g++-12.2.0          | 14.45       |
+| NVIDIA Orin (Cortex-A78AE) A64 (alt^2)                                            | g++-8.4.0           | 14.32       |
 | Apple armv8.4 (Firestorm) (alt^2)                                                 | g++-11.0.0          | 13.92       |
 | Apple armv8.5 (Avalanche)                                                         | g++-13.1.0          | 13.72       |
 
