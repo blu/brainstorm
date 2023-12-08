@@ -104,11 +104,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage
 [^2]: Non-native compiler tuning -march=corei7
 [^3]: Non-native compiler tuning -mcpu=cortex-a57
-[^4]: This MT8163A resides in a BQ M10 Ubuntu tablet, and as such is subject to the following performance detriments:
+[^4]: BQ M10 Ubuntu tablet, subject to performance detriments. Power management causes cores to pop in and out of existence, rather than freq scale them.
 [^5]: Windows build
-
-    (1) Power management causes cores to pop in and out of existence, rather than just scaling them by frequency.
-    (2) There is an entire (albeit minimal) Android running in a lxc container on that tablet.
 
 Note: There are two compiler snafus in all A64 alt-alt entries built by clang. First, the interpereter loop does not get aligned to a multiple-of-16 address, so one has to inject nops before the loop to get optimal loop alignment. Second, the code generated for the loop could be better:
 
