@@ -70,6 +70,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | NVIDIA armv8.2 (Carmel) A64 @ 1.907GHz (alt^2)                                    | g++-8.4.0           | 0m14.680s      |
 | NVIDIA armv8.2 (Carmel) A64 @ 2.265GHz (alt^2)                                    | g++-8.4.0           | 0m10.990s      |
 | NVIDIA Orin (Cortex-A78AE) A64 @ 2.2GHz (alt^2)                                   | g++-8.4.0           | 0m6.51s        |
+| Broadcom BCM2712 (Cortex-A76 r4p1) A64 @ 2.4GHz (alt^2)                           | clang++-13.0.1      | 0m8.213s       |
 | Fujitsu armv8.2 (A64fx) A64 @ 2.2GHz (alt^2)                                      | clang++-7.0.0       | 0m14.652s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)                            | clang++-9.0.0       | 0m12.117s      |
 | Snapdragon 835 (Cortex-A73 r?p?) A64 @ 2.55GHz (alt^2)                            | g++-7.5.0           | 0m11.208s      |
@@ -157,6 +158,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel i5-5257U (Broadwell) @ 3.1 GHz                                              | apple clang++ 11.0.3| 20.77       |
 | Apple armv8.5 (Avalanche) (alt^2)                                                 | apple clang++-14.0.0| 20.52       |
 | Snapdragon SQ1 (Cortex-A76 r?p?) (alt^2)                                          | clang++-10.0.0      | 20.07       |
+| Broadcom BCM2712 (Cortex-A76 r4p1) (alt^2)                                        | clang++-13.0.1      | 19.71       |
 | AWS Graviton2 (Cortex-A76 r3p0) (alt^2)                                           | clang++-9.0.1       | 19.35       |
 | Intel i7-1360P (Gracemont) @ 3.691 GHz (alt^2)                                    | clang-14.0.6        | 18.64       |
 | Intel i5-5257U (Broadwell) @ 3.1 GHz (alt^2)                                      | apple clang++ 11.0.3| 18.60       |
@@ -168,7 +170,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel i7-1360P (Raptor Cove) @ 4.984 (alt^2)                                      | clang-14.0.6        | 14.90       |
 | Intel i9-13900k (Raptor Cove) @ full boost (~5.50-5.56 GHZ)                       | clang-13.0 [^5]     | 14.88       |
 | Apple armv8.5 (Avalanche)                                                         | g++-12.2.0          | 14.45       |
-| NVIDIA Orin (Cortex-A78AE) A64 (alt^2)                                            | g++-8.4.0           | 14.32       |
+| NVIDIA Orin (Cortex-A78AE) (alt^2)                                                | g++-8.4.0           | 14.32       |
 | Apple armv8.4 (Firestorm) (alt^2)                                                 | g++-11.0.0          | 13.92       |
 | Apple armv8.5 (Avalanche)                                                         | g++-13.1.0          | 13.72       |
 
