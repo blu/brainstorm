@@ -82,7 +82,8 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                                        | g++-11.0.0          | 0m4.350s       |
 | Apple armv8.5 (Avalanche) @ 3.49GHz (alt^2)                                       | apple clang++ 14.0.0| 0m5.880s       |
 | Apple armv8.5 (Avalanche) @ 3.49GHz                                               | g++-12.2.0          | 0m4.142s       |
-| Apple armv8.5 (Avalanche) @ 3.49GHz                                               | g++-13.1.0          | 0m3.930s       |
+| Apple armv8.5 (Avalanche) @ 3.49GHz                                               | g++-13.1.0          | 0m3.910s       |
+| Apple armv8.6 (Everest) @ 4.05GHz                                                 | g++-13.3.0          | 0m3.460s       |
 | Intel i5-1035G4 (Ice Lake) @ 3.5 GHz (alt^2)                                      | clang++-9.0.0       | 0m4.930s       |
 | AMD Ryzen 9 7950x (Zen4) @ 4.5 GHz                                                | g++-11.2.1          | 0m3.90s        |
 | AMD Ryzen 9 7950x (Zen4) @ full boost (~5.7 GHz)                                  | g++-11.2.1          | 0m3.11s        |
@@ -173,6 +174,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Apple armv8.5 (Avalanche)                                                         | g++-12.2.0          | 14.45       |
 | NVIDIA Orin (Cortex-A78AE) (alt^2)                                                | g++-8.4.0           | 14.32       |
 | Snapdragon x1e78100 (Oryon) (alt^2)                                               | g++-11.4.0          | 14.14       |
+| Apple armv8.6 (Everest)                                                           | g++-13.3.0          | 14.01       |
 | Apple armv8.4 (Firestorm) (alt^2)                                                 | g++-11.0.0          | 13.92       |
-| Apple armv8.5 (Avalanche)                                                         | g++-13.1.0          | 13.72       |
+| Apple armv8.5 (Avalanche)                                                         | g++-13.1.0          | 13.65       |
 
