@@ -80,6 +80,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Snapdragon x1e78100 (Oryon) A64 @ 3.361 (alt^2)                                   | g++-11.4.0          | 0m4.208s       |
 | Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                                        | apple clang++ 12.0.0| 0m6.510s       |
 | Apple armv8.4 (Firestorm) @ 3.2GHz (alt^2)                                        | g++-11.0.0          | 0m4.350s       |
+| Apple armv8.4 (Firestorm) @ 3.2GHz                                                | g++-13.0.0          | 0m4.320s       |
 | Apple armv8.5 (Avalanche) @ 3.49GHz (alt^2)                                       | apple clang++ 14.0.0| 0m5.880s       |
 | Apple armv8.5 (Avalanche) @ 3.49GHz                                               | g++-12.2.0          | 0m4.142s       |
 | Apple armv8.5 (Avalanche) @ 3.49GHz                                               | g++-13.1.0          | 0m3.910s       |
@@ -175,6 +176,6 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | NVIDIA Orin (Cortex-A78AE) (alt^2)                                                | g++-8.4.0           | 14.32       |
 | Snapdragon x1e78100 (Oryon) (alt^2)                                               | g++-11.4.0          | 14.14       |
 | Apple armv8.6 (Everest)                                                           | g++-13.3.0          | 14.01       |
-| Apple armv8.4 (Firestorm) (alt^2)                                                 | g++-11.0.0          | 13.92       |
+| Apple armv8.4 (Firestorm)                                                         | g++-13.0.0          | 13.82       |
 | Apple armv8.5 (Avalanche)                                                         | g++-13.1.0          | 13.65       |
 
