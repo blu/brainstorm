@@ -103,6 +103,7 @@ Erik Bosman's mandelbrot generator (times include printout; 'alt' = alt version,
 | Intel i7-1360P (Gracemont) @ 3.691 GHz (alt^2)                                    | g++-8.5             | 0m5.600s       |
 | Intel i7-1360P (Gracemont) @ 3.691 GHz (alt^2)                                    | g++-11.2            | 0m6.080s       |
 | Intel i7-1360P (Gracemont) @ 3.691 GHz (alt^2)                                    | clang-14.0.6        | 0m5.050s       |
+| Intel Core Ultra X7 368H (Panther Lake) e-core @ 3.8 GHz (alt^2)                  | clang-13.0.0        | 0m3.731s       |
 
 
 [^1]: Generic compiler tuning; native tuning does not pose any speed advantage
@@ -174,6 +175,7 @@ Normalized performance from the above as `ticks = duration x CPU_GHz` (lower is 
 | Intel i9-13900k (Raptor Cove) @ full boost (~5.50-5.56 GHZ)                       | clang-13.0 [^5]     | 14.88       |
 | Apple armv8.5 (Avalanche)                                                         | g++-12.2.0          | 14.45       |
 | NVIDIA Orin (Cortex-A78AE) (alt^2)                                                | g++-8.4.0           | 14.32       |
+| Intel Core Ultra X7 368H (Panther Lake) e-core (alt^2)                            | clang-13.0.0        | 14.18       |
 | Snapdragon x1e78100 (Oryon) (alt^2)                                               | g++-11.4.0          | 14.14       |
 | Apple armv8.6 (Everest)                                                           | g++-13.3.0          | 14.01       |
 | Apple armv8.4 (Firestorm)                                                         | g++-13.0.0          | 13.82       |
